@@ -1,0 +1,42 @@
+{
+  "questions_file": "frozen_artifacts/beat120_questions.jsonl",
+  "prompts_registry": "prompts/registry.json",
+  "models_config": "frozen_artifacts/models.json",
+  "output_dir": "results",
+  
+  "core_temperatures": [0.0, 0.7],
+  "core_top_p": 1.0,
+  "core_max_tokens": 120,
+  "core_replicates": 3,
+  
+  "extended_temperatures": [0.0, 0.3, 0.7, 1.0],
+  "extended_top_p_values": [0.9, 1.0],
+  "extended_replicates": 5,
+  
+  "run_mechanistic_core": true,
+  "run_mechanistic_extended": false,
+  "run_behavioral_anchors": true,
+  "run_reasoning_case_study": false,
+  
+  "reputation_levels": ["A0", "A1", "A2", "A3"],
+  "reputation_levels_extended": ["A0", "A1", "A2", "A3", "A3_fallible"],
+  "evidence_levels": ["B0", "B1", "B2", "B3"],
+  "framing_levels": ["C1", "C2"],
+  
+  "parallel": false,
+  "max_workers": 2,
+  "device": "cuda",
+  
+  "api_key_env": "OPENROUTER_API_KEY",
+  "api_base_url": "https://openrouter.ai/api/v1",
+  "api_reference_tokenizer_model_id": "gpt2",
+  
+  "ablations": {
+    "partial_disagreement": false,
+    "disagreement_rate": 0.5,
+    "authority_but_uncertain": false,
+    "aep_entity_virtualization": true,
+    "aep_ratio": 0.5
+  }
+}
+

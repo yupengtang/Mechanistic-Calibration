@@ -1,0 +1,40 @@
+{
+  "description": "API pricing snapshot used for cost estimation (OpenRouter).",
+  "currency": "USD",
+  "unit": "per 1K tokens",
+  "prices": {
+    "anthropic/claude-3.5-sonnet": {
+      "prompt": 0.003,
+      "completion": 0.015
+    },
+    "openai/gpt-4o-2024-08-06": {
+      "prompt": 0.0025,
+      "completion": 0.01
+    },
+    "openai/gpt-4o-mini": {
+      "prompt": 0.00015,
+      "completion": 0.0006
+    },
+    "google/gemini-pro-1.5": {
+      "prompt": 0.0025,
+      "completion": 0.0075
+    },
+    "mistralai/mistral-large-2411": {
+      "prompt": 0.002,
+      "completion": 0.006
+    },
+    "openai/o1-preview": {
+      "prompt": 0.015,
+      "completion": 0.06
+    },
+    "openai/o3-mini": {
+      "prompt": 0.0011,
+      "completion": 0.0044
+    }
+  },
+  "notes": [
+    "Prices are expressed as USD per 1K tokens (input/prompt and output/completion).",
+    "Costs may vary by provider/routing and are intended for approximate budgeting only."
+  ]
+}
+

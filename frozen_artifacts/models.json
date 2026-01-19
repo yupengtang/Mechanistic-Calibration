@@ -1,0 +1,151 @@
+{
+  "version": "1.0.0",
+  "description": "Frozen model set for BEAT-120 experiment",
+  
+  "mechanistic_probing_set": {
+    "description": "Local models with logit access for mechanistic analysis",
+    "core": [
+      {
+        "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+        "family": "Llama",
+        "size_b": 8,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "main_results"
+      },
+      {
+        "model_id": "meta-llama/Llama-3.1-70B-Instruct",
+        "family": "Llama",
+        "size_b": 70,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "main_results"
+      },
+      {
+        "model_id": "Qwen/Qwen2.5-7B-Instruct",
+        "family": "Qwen",
+        "size_b": 7,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "main_results"
+      },
+      {
+        "model_id": "Qwen/Qwen2.5-32B-Instruct",
+        "family": "Qwen",
+        "size_b": 32,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "main_results"
+      }
+    ],
+    "extended": [
+      {
+        "model_id": "meta-llama/Llama-3.1-405B-Instruct",
+        "family": "Llama",
+        "size_b": 405,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "appendix",
+        "note": "compute_permitting"
+      },
+      {
+        "model_id": "Qwen/Qwen2.5-72B-Instruct",
+        "family": "Qwen",
+        "size_b": 72,
+        "provider": "local",
+        "logits_available": true,
+        "purpose": "appendix",
+        "note": "compute_permitting"
+      }
+    ]
+  },
+  
+  "behavioral_anchor_set": {
+    "description": "API models for external validity (no logits)",
+    "models": [
+      {
+        "model_id": "anthropic/claude-3.5-sonnet",
+        "family": "Claude",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "behavioral_comparison"
+      },
+      {
+        "model_id": "openai/gpt-4o-2024-08-06",
+        "family": "GPT-4",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "behavioral_comparison"
+      },
+      {
+        "model_id": "google/gemini-pro-1.5",
+        "family": "Gemini",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "behavioral_comparison"
+      },
+      {
+        "model_id": "mistralai/mistral-large-2411",
+        "family": "Mistral",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "behavioral_comparison"
+      }
+    ]
+  },
+  
+  "reasoning_case_study": {
+    "description": "Minimal protocol for reasoning models (N=24, 4 conditions only)",
+    "models": [
+      {
+        "model_id": "openai/o1-preview",
+        "family": "OpenAI-Reasoning",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "discussion_level",
+        "protocol": "minimal",
+        "conditions": ["A1/B0/C1", "A3/B0/C1", "A1/B2/C1", "A3/B2/C1"],
+        "decoding": {"temperature": 0.0, "top_p": 1.0},
+        "runs_per_item": 1,
+        "note": "Single run to limit cost and reduce stochastic confounds"
+      },
+      {
+        "model_id": "openai/o3-mini",
+        "family": "OpenAI-Reasoning",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "discussion_level",
+        "protocol": "minimal",
+        "conditions": ["A1/B0/C1", "A3/B0/C1", "A1/B2/C1", "A3/B2/C1"],
+        "decoding": {"temperature": 0.0, "top_p": 1.0},
+        "runs_per_item": 1
+      },
+      {
+        "model_id": "openai/gpt-4o-mini",
+        "family": "GPT-4",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "discussion_level",
+        "protocol": "minimal",
+        "note": "Control baseline for reasoning comparison"
+      }
+    ]
+  },
+  
+  "screening_models": {
+    "description": "Models used for BEAT-120 question boundary selection",
+    "models": [
+      {
+        "model_id": "meta-llama/Llama-3.1-70B-Instruct",
+        "provider": "local",
+        "purpose": "boundary_selection"
+      },
+      {
+        "model_id": "openai/gpt-4o-mini",
+        "provider": "openrouter",
+        "purpose": "boundary_selection"
+      }
+    ]
+  }
+}
+

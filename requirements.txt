@@ -1,0 +1,45 @@
+# Core ML dependencies
+torch>=2.1.0
+transformers>=4.35.0
+accelerate>=0.24.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+datasets>=2.14.0  # HuggingFace Datasets for PubMedQA/SciFact/ContractNLI
+
+# Statistical analysis
+statsmodels>=0.14.0
+pingouin>=0.5.3
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# CLI and utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+pathlib2>=2.3.7
+jsonlines>=4.0.0
+
+# API clients
+requests>=2.31.0
+openai>=1.0.0
+anthropic>=0.7.0
+
+# Tokenization
+sentencepiece>=0.1.99
+protobuf>=4.24.0
+
+# Utils
+huggingface_hub>=0.19.0
+
+# Optional: for web dashboard
+streamlit>=1.28.0
+
+# Note: R packages required for GLMM analysis
+# Install R separately, then run:
+# Rscript -e "install.packages(c('lme4', 'emmeans', 'car', 'broom.mixed', 'dplyr', 'readr', 'jsonlite'), repos='https://cran.r-project.org')"
