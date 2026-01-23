@@ -4,7 +4,47 @@
 
 ---
 
-## 前置检查
+## 第 0 步: 下载本地模型（Mechanistic Probing）
+
+### 方法 1: 交互式下载（推荐，一次下载一个）
+
+```bash
+# 交互式下载（会提示选择模型）
+python download_one_model.py
+```
+
+**推荐顺序：**
+1. Qwen 7B (~14 GB) - 最小，快速测试
+2. Llama 8B (~16 GB) - 需要 HuggingFace 登录
+3. Qwen 32B (~64 GB) 或 Llama 70B (~140 GB)
+
+**Llama 模型需要认证：**
+```bash
+# 1. 获取 token: https://huggingface.co/settings/tokens
+# 2. 登录
+huggingface-cli login
+
+# 3. 接受许可证（访问模型页面并点击同意）
+# https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+```
+
+### 方法 2: 批量下载脚本
+
+```bash
+# 下载所有核心模型（~234 GB）
+bash download_models.sh
+```
+
+### 方法 3: 测试模型加载
+
+```bash
+# 测试已下载的模型是否可以正常加载
+python test_model_loading.py
+```
+
+---
+
+## 第 1 步: 前置检查
 
 ```bash
 # 1. 检查 Python 依赖
@@ -13,6 +53,9 @@ python verify_setup.py
 # 2. 确保 .env 文件存在（API 模型需要）
 cat .env
 # 应该包含: OPENROUTER_API_KEY=your-key-here
+
+# 3. 检查 CUDA（本地模型需要）
+python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 ```
 
 ---
