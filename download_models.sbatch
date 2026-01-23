@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=download_beat120_models
+#SBATCH --account=gts-mlin91
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=8
