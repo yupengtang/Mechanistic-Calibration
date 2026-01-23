@@ -9,11 +9,18 @@ export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
 export TRANSFORMERS_CACHE=$HF_HOME/transformers
 mkdir -p $HF_HOME
 
+# Set pip install location to project directory (home has limited quota)
+export PYTHONUSERBASE=/storage/project/r-pkastner3-0/ytang454/python_packages
+export PATH=$PYTHONUSERBASE/bin:$PATH
+export PYTHONPATH=$PYTHONUSERBASE/lib/python3.9/site-packages:$PYTHONPATH
+mkdir -p $PYTHONUSERBASE
+
 echo "=========================================="
 echo "BEAT-120 Step-by-Step Installation"
 echo "=========================================="
 echo ""
 echo "[INFO] HuggingFace cache: $HF_HOME"
+echo "[INFO] Python packages: $PYTHONUSERBASE"
 echo ""
 
 # Step 1: Install torch
