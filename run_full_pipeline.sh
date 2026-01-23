@@ -3,6 +3,12 @@
 
 set -e
 
+# Set HuggingFace cache to project directory
+export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
+export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
+export TRANSFORMERS_CACHE=$HF_HOME/transformers
+mkdir -p $HF_HOME
+
 echo "======================================================"
 echo "BEAT-120 Experimental Pipeline"
 echo "======================================================"

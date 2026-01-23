@@ -22,9 +22,33 @@ wheels/
 
 # Virtual environments
 venv/
-ENV/
 env/
-.venv
+ENV/
+
+# Environment files
+.env
+.env.local
+
+# Experiment results
+results/
+logs/
+*.jsonl
+!frozen_artifacts/*.jsonl
+
+# Data
+data/*.jsonl
+data/*.txt
+!data/README.md
+
+# Figures
+figures/*.png
+figures/*.pdf
+!figures/README.md
+
+# R
+.Rhistory
+.RData
+.Rproj.user
 
 # IDE
 .vscode/
@@ -32,63 +56,17 @@ env/
 *.swp
 *.swo
 *~
-.DS_Store
-
-# Jupyter
-.ipynb_checkpoints
-*.ipynb
-
-# Environment
-.env
-.env.local
-
-# Logs
-logs/
-*.log
-
-# Results (large files)
-results/trials.jsonl
-results/trials_extended.jsonl
-results/reasoning_case_study.jsonl
-results/*.jsonl
-
-# Keep analysis outputs but ignore raw trials
-!results/analysis/
-
-# Models (don't commit large model files)
-models/
-*.pt
-*.pth
-*.bin
-*.safetensors
-
-# Data (don't commit large datasets)
-data/candidates.jsonl
-data/raw/
-
-# Keep examples
-!data/candidates_example.jsonl
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# R
-.Rhistory
-.RData
-.Rproj.user
 
 # OS
-Thumbs.db
 .DS_Store
+Thumbs.db
 
-# Pytest
-.pytest_cache/
-.coverage
-htmlcov/
+# HuggingFace cache (if someone accidentally puts it in repo)
+hf_cache/
+.cache/
 
-# MyPy
-.mypy_cache/
-.dmypy.json
-dmypy.json
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors

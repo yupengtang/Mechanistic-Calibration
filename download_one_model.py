@@ -5,6 +5,15 @@ Useful for testing or limited disk space
 """
 
 import sys
+import os
+
+# Set HuggingFace cache to project directory
+HF_HOME = "/storage/project/r-pkastner3-0/ytang454/hf_cache"
+os.environ["HF_HOME"] = HF_HOME
+os.environ["HUGGINGFACE_HUB_CACHE"] = os.path.join(HF_HOME, "hub")
+os.environ["TRANSFORMERS_CACHE"] = os.path.join(HF_HOME, "transformers")
+os.makedirs(HF_HOME, exist_ok=True)
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 

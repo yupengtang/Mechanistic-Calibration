@@ -4,7 +4,28 @@
 
 ---
 
-## 第 0 步: 下载本地模型（Mechanistic Probing）
+## 第 0 步: 环境设置（重要！）
+
+### 设置模型缓存路径
+
+在 PACE Phoenix 上，推荐把模型权重缓存到项目目录（不是 home，空间更大）：
+
+```bash
+# 方法 1: 每次使用前 source 这个文件（推荐）
+source setup_env.sh
+
+# 方法 2: 或者加到 ~/.bashrc（永久生效）
+echo 'export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache' >> ~/.bashrc
+echo 'export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub' >> ~/.bashrc
+echo 'export TRANSFORMERS_CACHE=$HF_HOME/transformers' >> ~/.bashrc
+source ~/.bashrc
+```
+
+**说明：** 所有下载/实验脚本已经自动设置好了这个路径，你只需要在交互式使用时 source 一下。
+
+---
+
+## 第 1 步: 下载本地模型（Mechanistic Probing）
 
 ### 方法 1: 交互式下载（推荐，一次下载一个）
 
@@ -28,11 +49,14 @@ huggingface-cli login
 # https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
 ```
 
-### 方法 2: 批量下载脚本
+### 方法 2: 自动下载所有核心模型（推荐）
 
 ```bash
-# 下载所有核心模型（~234 GB）
-bash download_models.sh
+# 先安装依赖（按步骤安装，避免内存问题）
+bash install_step_by_step.sh
+
+# 再自动下载 4 个核心模型（~234 GB）
+python auto_download_models.py
 ```
 
 ### 方法 3: 测试模型加载
@@ -42,9 +66,29 @@ bash download_models.sh
 python test_model_loading.py
 ```
 
+### 在 PACE Phoenix 上模型权重保存到哪里？
+
+默认情况下，HuggingFace 会把模型权重缓存到：
+- `~/.cache/huggingface/hub/`
+
+在 Phoenix 上更推荐把缓存放到项目目录（便于复用、避免占用 home 配额）。例如：
+
+```bash
+mkdir -p /storage/project/r-pkastner3-0/ytang454/hf_cache
+
+# 仅设置 HF_HOME 即可
+export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
+
+# 可选：显式指定 hub 缓存目录
+export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
+export TRANSFORMERS_CACHE=$HF_HOME/transformers
+```
+
+建议把上面几行加入你的作业脚本（sbatch）或 `~/.bashrc`，这样每次跑实验都会复用同一份权重缓存。
+
 ---
 
-## 第 1 步: 前置检查
+## 第 2 步: 前置检查
 
 ```bash
 # 1. 检查 Python 依赖
@@ -61,6 +105,8 @@ python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
 ---
 
 ## 测试 1: 数据生成（候选池构建）
+
+**注意：** 确保已经 `source setup_env.sh` 设置了缓存路径。
 
 ```bash
 # 测试构建候选池（使用小样本）

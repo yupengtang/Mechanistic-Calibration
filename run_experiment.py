@@ -8,6 +8,15 @@ Main Entry Point for BEAT-120 Experiment (Version 2 - Fixed)
 is sampled once and reused as a shared initial state for all Pass-2 interventions."
 """
 
+import os
+
+# Set HuggingFace cache to project directory
+HF_HOME = "/storage/project/r-pkastner3-0/ytang454/hf_cache"
+os.environ["HF_HOME"] = HF_HOME
+os.environ["HUGGINGFACE_HUB_CACHE"] = os.path.join(HF_HOME, "hub")
+os.environ["TRANSFORMERS_CACHE"] = os.path.join(HF_HOME, "transformers")
+os.makedirs(HF_HOME, exist_ok=True)
+
 import json
 import argparse
 from pathlib import Path
