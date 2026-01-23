@@ -87,7 +87,7 @@ print(f'Loading {model_id}...')
 
 # Download tokenizer
 tokenizer = AutoTokenizer.from_pretrained(model_id)
-print(f'✓ Tokenizer downloaded')
+print(f'[OK] Tokenizer downloaded')
 
 # Download model
 model = AutoModelForCausalLM.from_pretrained(
@@ -96,13 +96,13 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map='auto',
     low_cpu_mem_usage=True
 )
-print(f'✓ Model downloaded')
+print(f'[OK] Model downloaded')
 
 # Get model size
 param_count = sum(p.numel() for p in model.parameters())
-print(f'✓ Parameters: {param_count / 1e9:.1f}B')
+print(f'[OK] Parameters: {param_count / 1e9:.1f}B')
 
-print(f'✓ {model_id} ready!')
+print(f'[OK] {model_id} ready!')
 print()
 " || {
         echo "Failed to download $model"

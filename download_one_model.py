@@ -69,7 +69,7 @@ def download_model(model_id: str):
         # Load tokenizer
         print("Step 1/3: Downloading tokenizer...")
         tokenizer = AutoTokenizer.from_pretrained(model_id)
-        print("✓ Tokenizer ready\n")
+        print("[OK] Tokenizer ready\n")
         
         # Load model
         print("Step 2/3: Downloading model (this may take a while)...")
@@ -84,7 +84,7 @@ def download_model(model_id: str):
             model = model.to(device)
         
         param_count = sum(p.numel() for p in model.parameters())
-        print(f"✓ Model loaded ({param_count / 1e9:.1f}B parameters)\n")
+        print(f"[OK] Model loaded ({param_count / 1e9:.1f}B parameters)\n")
         
         # Test inference
         print("Step 3/3: Testing inference...")
@@ -106,7 +106,7 @@ def download_model(model_id: str):
             mem_used = torch.cuda.max_memory_allocated() / 1e9
             print(f"\nGPU memory used: {mem_used:.2f} GB")
         
-        print(f"\n✅ SUCCESS! {model_id} is ready to use.\n")
+        print(f"\n[SUCCESS] {model_id} is ready to use.\n")
         
         # Cleanup
         del model, tokenizer
@@ -116,19 +116,19 @@ def download_model(model_id: str):
         return True
         
     except Exception as e:
-        print(f"\n❌ ERROR: {str(e)}\n")
+        print(f"\n[ERROR] {str(e)}\n")
         print("Troubleshooting:")
         if "401" in str(e) or "gated" in str(e).lower():
-            print("  → This model requires authentication")
-            print("  → Run: huggingface-cli login")
-            print("  → Get token from: https://huggingface.co/settings/tokens")
+            print("  - This model requires authentication")
+            print("  - Run: huggingface-cli login")
+            print("  - Get token from: https://huggingface.co/settings/tokens")
         elif "CUDA out of memory" in str(e):
-            print("  → GPU memory insufficient")
-            print("  → Try a smaller model first")
-            print("  → Check: nvidia-smi")
+            print("  - GPU memory insufficient")
+            print("  - Try a smaller model first")
+            print("  - Check: nvidia-smi")
         else:
-            print("  → Check internet connection")
-            print("  → Check disk space: df -h ~/.cache/huggingface/")
+            print("  - Check internet connection")
+            print("  - Check disk space: df -h ~/.cache/huggingface/")
         print()
         return False
 
@@ -142,18 +142,18 @@ def main():
     try:
         import torch
         from transformers import AutoModelForCausalLM
-        print("✓ Dependencies installed\n")
+        print("[OK] Dependencies installed\n")
     except ImportError as e:
-        print(f"❌ Missing dependency: {e}")
+        print(f"[ERROR] Missing dependency: {e}")
         print("\nPlease run: pip install torch transformers accelerate")
         return 1
     
     # Show CUDA status
     if torch.cuda.is_available():
-        print(f"✓ CUDA available ({torch.cuda.device_count()} device(s))")
-        print(f"✓ GPU: {torch.cuda.get_device_name(0)}\n")
+        print(f"[OK] CUDA available ({torch.cuda.device_count()} device(s))")
+        print(f"[OK] GPU: {torch.cuda.get_device_name(0)}\n")
     else:
-        print("⚠ CUDA not available (will use CPU, slower)\n")
+        print("[WARNING] CUDA not available (will use CPU, slower)\n")
     
     # Show models
     print("Available models (Core set for main experiments):")
@@ -189,7 +189,7 @@ def main():
     print(f"\nYou selected: {model_info['id']}")
     print(f"Disk space needed: {model_info['size']}")
     if model_info.get("auth"):
-        print("\n⚠ This model requires HuggingFace authentication!")
+        print("\n[WARNING] This model requires HuggingFace authentication!")
         print("Before continuing:")
         print("  1. Get token from: https://huggingface.co/settings/tokens")
         print("  2. Run: huggingface-cli login")
@@ -206,9 +206,9 @@ def main():
     if success:
         print("="*70)
         print("Next steps:")
-        print("  • Download more models: python download_one_model.py")
-        print("  • Test all models: python test_model_loading.py")
-        print("  • Run experiment: python run_experiment.py --test-mode")
+        print("  - Download more models: python download_one_model.py")
+        print("  - Test all models: python test_model_loading.py")
+        print("  - Run experiment: python run_experiment.py --test-mode")
         print("="*70 + "\n")
         return 0
     else:
