@@ -37,6 +37,10 @@ required_files=(
 for file in "${required_files[@]}"; do
     if [ ! -f "$file" ]; then
         echo "ERROR: Missing required file: $file"
+        if [ "$file" = "frozen_artifacts/beat120_questions.jsonl" ]; then
+            echo "ERROR: You must generate BEAT-120 questions first:"
+            echo "       python -m src.beat120_builder --candidates data/candidate_pool.jsonl --output frozen_artifacts/beat120_questions.jsonl"
+        fi
         exit 1
     fi
 done

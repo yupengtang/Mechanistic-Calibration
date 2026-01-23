@@ -73,13 +73,9 @@ else
     # Check if full questions file exists
     if [ ! -f "frozen_artifacts/beat120_questions.jsonl" ]; then
         echo "[ERROR] beat120_questions.jsonl not found"
-        echo "[INFO] Generating from candidate pool..."
-        python -m src.beat120_builder
-        
-        if [ $? -ne 0 ]; then
-            echo "[ERROR] Failed to generate BEAT-120 questions"
-            exit 1
-        fi
+        echo "[ERROR] You must generate it first using:"
+        echo "        python -m src.beat120_builder --candidates data/candidate_pool.jsonl --output frozen_artifacts/beat120_questions.jsonl"
+        exit 1
     fi
     
     python run_experiment.py \
