@@ -164,9 +164,12 @@ def compute_mechanistic_taxonomy(df: pd.DataFrame) -> pd.DataFrame:
 
 def compute_ssi(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
     """
-    Compute SSI 2.0 (Susceptibility to Social Influence Index).
+    Compute SSI 2.0 (Susceptibility to Social Influence Index) with drift adjustment.
     
-    Behavioral SSI: logit(P_rev | A3, B0) - logit(P_rev | A1, B0)
+    Behavioral SSI (drift-adjusted): 
+        SSI^(beh) = logit(P_rev | A3, B0) - logit(P_rev | A1, B0) 
+                    - [logit(P_rev | A0) - logit(P_stable | A0)]
+    
     Mechanistic SSI: E[ΔLogOdds | A3, B0] - E[ΔLogOdds | A1, B0]
     
     Returns:
@@ -180,7 +183,18 @@ def compute_ssi(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
     for model_id in df["model_id"].unique():
         model_data = df[df["model_id"] == model_id]
         
-        # Behavioral SSI: A3/B0 vs A1/B0
+        # Drift baseline (A0) for adjustment
+        a0 = model_data[model_data["reputation_factor"] == "A0"]
+        drift_adjustment = 0.0
+        if len(a0) > 0:
+            p_rev_a0 = a0["reversal"].mean()
+            p_stable_a0 = 1.0 - p_rev_a0
+            # Clip to avoid logit(0) or logit(1)
+            p_rev_a0 = np.clip(p_rev_a0, 0.01, 0.99)
+            p_stable_a0 = np.clip(p_stable_a0, 0.01, 0.99)
+            drift_adjustment = logit(p_rev_a0) - logit(p_stable_a0)
+        
+        # Behavioral SSI: A3/B0 vs A1/B0 (drift-adjusted per DESIGN.md §8.3)
         a3b0 = model_data[
             (model_data["reputation_factor"] == "A3") &
             (model_data["evidence_factor"] == "B0")
@@ -198,15 +212,21 @@ def compute_ssi(df: pd.DataFrame) -> Dict[str, pd.DataFrame]:
             p_rev_a3 = np.clip(p_rev_a3, 0.01, 0.99)
             p_rev_a1 = np.clip(p_rev_a1, 0.01, 0.99)
             
-            ssi_beh = logit(p_rev_a3) - logit(p_rev_a1)
+            # Compute SSI with drift adjustment
+            ssi_beh_raw = logit(p_rev_a3) - logit(p_rev_a1)
+            ssi_beh_adjusted = ssi_beh_raw - drift_adjustment
             
             results_beh.append({
                 "model_id": model_id,
                 "p_reversal_A3B0": a3b0["reversal"].mean(),
                 "p_reversal_A1B0": a1b0["reversal"].mean(),
-                "SSI_behavioral": ssi_beh,
+                "p_reversal_A0": a0["reversal"].mean() if len(a0) > 0 else np.nan,
+                "SSI_behavioral_raw": ssi_beh_raw,
+                "SSI_behavioral_drift_adjusted": ssi_beh_adjusted,
+                "drift_adjustment": drift_adjustment,
                 "n_A3B0": len(a3b0),
-                "n_A1B0": len(a1b0)
+                "n_A1B0": len(a1b0),
+                "n_A0": len(a0)
             })
         
         # Mechanistic SSI (if log-odds available)

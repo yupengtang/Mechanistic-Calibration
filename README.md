@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-Code and data for ACL 2026. [[Paper]](#) [[DESIGN.md](DESIGN.md)] [[EXPERIMENTS.md](EXPERIMENTS.md)]
+Code and data for an ICML submission (in progress). [[DESIGN.md](DESIGN.md)] [[EXPERIMENTS.md](EXPERIMENTS.md)]
 
 ---
 
@@ -224,7 +224,7 @@ Edit `config.json`:
 - **Code**: This repository (MIT License)
 - **BEAT-120**: `frozen_artifacts/beat120_questions.jsonl` (sample: `beat120_questions_SAMPLE.jsonl`)
 - **Candidate pool**: Generated from PubMedQA, SciFact, ContractNLI (all public datasets)
-- **Experimental data**: Released upon paper acceptance
+- **Experimental data**: Planned for release
 - **Models**: Llama (Meta), Qwen (Alibaba), API models via OpenRouter
 
 ---
@@ -240,11 +240,11 @@ Edit `config.json`:
 ## Citation
 
 ```bibtex
-@inproceedings{mechanistic-calibration-2026,
+@inproceedings{mechanistic-calibration,
   title={Mechanistic Calibration or Social Compliance? Disentangling Reputation, Evidence, and Framing in {LLM} Decision Revision},
   author={[Authors]},
-  booktitle={Proceedings of ACL},
-  year={2026}
+  booktitle={ICML},
+  year={TBD}
 }
 ```
 
