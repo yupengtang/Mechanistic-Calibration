@@ -28,7 +28,15 @@
         "provider": "local",
         "logits_available": true,
         "purpose": "exploratory",
-        "note": "Moderate-scale comparison for capacity exploration (RQ4)"
+        "note": "Moderate-scale comparison for capacity exploration (RQ4)",
+        "requires_multi_gpu": true,
+        "min_gpus": 2,
+        "recommended_gpus": 2,
+        "loading_config": {
+          "device_map": "auto",
+          "torch_dtype": "float16",
+          "max_memory": "40GB_per_gpu"
+        }
       }
     ]
   },
