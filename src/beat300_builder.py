@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-BEAT-120 Benchmark Builder: Question Generation and Cognitive Boundary Filtering
+BEAT-300 Benchmark Builder: Question Generation and Cognitive Boundary Filtering
 
 This module implements the extreme quality control procedure for selecting
 questions at the model's cognitive boundary (4:6 to 6:4 answer distribution).
+Per DESIGN.md §4, N=300 items stratified as Medicine(100), Science(100), Law(100).
 """
 
 import json
@@ -383,12 +384,12 @@ def evaluate_candidate_boundary_api(
     )
 
 
-def select_beat120_questions(
+def select_beat300_questions(
     candidates: List[CandidateQuestion],
     screening_models: List[Dict[str, Any]],  # [{"type": "local"/"openrouter", ...}]
     num_samples: int = 10,
     temperature: float = 0.7,
-    target_count: int = 120,
+    target_count: int = 300,
     device: str = "cuda",
     log_file: Optional[Path] = None,
     stop_sequences: Optional[List[str]] = None,
@@ -396,9 +397,9 @@ def select_beat120_questions(
     domain_targets: Optional[Dict[str, int]] = None
 ) -> Tuple[List[Question], List[Dict[str, Any]]]:
     """
-    Select BEAT-120 questions from candidates using boundary filtering.
+    Select BEAT-300 questions from candidates using boundary filtering.
     
-    Selection criteria:
+    Selection criteria (DESIGN.md §4.3):
     1. For at least one screening model: answer distribution in [0.4, 0.6]
     2. For no screening model: degenerate distribution (all same answer)
     3. Refusal/violation rate < 20%
@@ -406,10 +407,10 @@ def select_beat120_questions(
     
     Args:
         candidates: List of candidate questions
-        screening_models: List of (model, tokenizer) tuples
+        screening_models: List of screening model specs
         num_samples: Samples per candidate
         temperature: Sampling temperature
-        target_count: Target number of questions (default: 120)
+        target_count: Target number of questions (default: 300)
         device: Device
         log_file: Optional path to save selection log
     
@@ -420,9 +421,9 @@ def select_beat120_questions(
         stop_sequences = ["</s>", "###", "User:", "Assistant:", "Q:", "A:", "B:"]
 
     if domain_targets is None:
-        domain_targets = {"Medicine": 40, "Science": 40, "Law": 40}
+        domain_targets = {"Medicine": 100, "Science": 100, "Law": 100}
 
-    print(f"Starting BEAT-120 selection from {len(candidates)} candidates")
+    print(f"Starting BEAT-300 selection from {len(candidates)} candidates")
     print(f"Screening with {len(screening_models)} model(s)")
     
     selection_log = []
@@ -497,7 +498,7 @@ def select_beat120_questions(
         
         # Do NOT early-stop: need full pool for stratified sampling (DESIGN.md §3.3)
     
-    # Stratified sampling to BEAT-120 (DESIGN.md §3.3)
+    # Stratified sampling to BEAT-300 (DESIGN.md §4.4)
     retained_candidates: List[Tuple[CandidateQuestion, Dict[str, Any]]] = []
     for idx, log_entry in enumerate(selection_log):
         if log_entry.get("retained"):
@@ -563,7 +564,7 @@ def select_beat120_questions(
             selected_questions.append(cand.to_question(question_id))
     
     print(f"\n{'='*60}")
-    print(f"BEAT-120 Selection Complete")
+    print(f"BEAT-300 Selection Complete")
     print(f"Total candidates: {len(candidates)}")
     print(f"Questions retained: {len(selected_questions)}")
     print(f"{'='*60}")
@@ -600,11 +601,11 @@ def select_beat120_questions(
     return selected_questions, selection_log
 
 
-def save_beat120_questions_minimal(questions: List[Question], output_file: Path) -> None:
+def save_beat300_questions_minimal(questions: List[Question], output_file: Path) -> None:
     """
-    Save frozen BEAT-120 questions.
+    Save frozen BEAT-300 questions.
 
-    Required keys (DESIGN.md §3.3): {question_id, domain, prompt_base, excerpt, hash}
+    Required keys (DESIGN.md §4.4): {question_id, domain, prompt_base, excerpt, hash}
     We also include a minimal `metadata` payload needed to instantiate B2/B3 add-ons
     during experiments (e.g., `b2_evidence`, `source`, and `ground_truth`).
     """
@@ -635,16 +636,16 @@ def save_beat120_questions_minimal(questions: List[Question], output_file: Path)
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="BEAT-120 boundary selection (DESIGN.md §3.3)")
+    parser = argparse.ArgumentParser(description="BEAT-300 boundary selection (DESIGN.md §4.3)")
     parser.add_argument("--candidates", type=str, required=True, help="Path to data/candidate_pool.jsonl")
-    parser.add_argument("--output", type=str, default="frozen_artifacts/beat120_questions.jsonl")
+    parser.add_argument("--output", type=str, default="frozen_artifacts/beat300_questions.jsonl")
     parser.add_argument("--selection-log", type=str, default="frozen_artifacts/selection_log.jsonl")
-    parser.add_argument("--screening-models", type=str, nargs="+", default=["meta-llama/Llama-3.1-70B-Instruct", "openai/gpt-4o-mini"])
+    parser.add_argument("--screening-models", type=str, nargs="+", default=["meta-llama/Llama-3.1-8B-Instruct", "Qwen/Qwen2.5-7B-Instruct"])
     parser.add_argument("--num-samples", type=int, default=10)
     parser.add_argument("--temperature", type=float, default=0.7)
     parser.add_argument("--max-tokens", type=int, default=120)
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--target-count", type=int, default=120)
+    parser.add_argument("--target-count", type=int, default=300)
     args = parser.parse_args()
 
     candidates = load_candidates_from_jsonl(Path(args.candidates))
@@ -671,14 +672,14 @@ def main():
             mdl.eval()
             specs.append({"type": "local", "model_id": mid, "model": mdl, "tokenizer": tok})
 
-    # Domain targets: enforce 40/40/40 when target_count=120; else proportional
-    if args.target_count == 120:
-        domain_targets = {"Medicine": 40, "Science": 40, "Law": 40}
+    # Domain targets: enforce 100/100/100 when target_count=300; else proportional
+    if args.target_count == 300:
+        domain_targets = {"Medicine": 100, "Science": 100, "Law": 100}
     else:
         per = args.target_count // 3
         domain_targets = {"Medicine": per, "Science": per, "Law": args.target_count - 2 * per}
 
-    selected, _log = select_beat120_questions(
+    selected, _log = select_beat300_questions(
         candidates=candidates,
         screening_models=specs,
         num_samples=args.num_samples,
@@ -691,8 +692,8 @@ def main():
         domain_targets=domain_targets,
     )
 
-    save_beat120_questions_minimal(selected, Path(args.output))
-    print(f"Saved BEAT-120 questions to: {args.output}")
+    save_beat300_questions_minimal(selected, Path(args.output))
+    print(f"Saved BEAT-300 questions to: {args.output}")
 
 
 if __name__ == "__main__":

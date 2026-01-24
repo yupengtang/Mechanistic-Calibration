@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Two-Pass Experiment Protocol for BEAT-120
+Two-Pass Experiment Protocol for BEAT-300
 
 This module implements the core experimental protocol:
 - Pass 1: Baseline answer
@@ -557,7 +557,7 @@ class TwoPassExperiment:
 if __name__ == "__main__":
     print("Two-Pass Experiment Protocol")
     print("=" * 60)
-    print("This module implements the core BEAT-120 experimental protocol:")
+    print("This module implements the core BEAT-300 experimental protocol:")
     print("- Pass 1: Baseline answer")
     print("- Pass 2: Intervention (A × B × C factors)")
     print("- Mechanistic probing for local models")

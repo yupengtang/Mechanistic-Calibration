@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Setup Verification Script for BEAT-120 Project
+Setup Verification Script for BEAT-300 Project
 
 This script performs a lightweight verification of:
 - required files

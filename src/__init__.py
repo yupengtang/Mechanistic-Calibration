@@ -1,5 +1,5 @@
 """
-BEAT-120 Experimental Framework
+BEAT-300 Experimental Framework
 Mechanistic Calibration or Social Compliance?
 """
 

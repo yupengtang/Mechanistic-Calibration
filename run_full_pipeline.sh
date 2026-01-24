@@ -10,7 +10,7 @@ export TRANSFORMERS_CACHE=$HF_HOME/transformers
 mkdir -p $HF_HOME
 
 echo "======================================================"
-echo "BEAT-120 Experimental Pipeline"
+echo "BEAT-300 Experimental Pipeline"
 echo "======================================================"
 
 # Validate environment

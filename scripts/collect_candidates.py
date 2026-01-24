@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Candidate Pool Construction for BEAT-120
+Candidate Pool Construction for BEAT-300
 
 Build a pool of ~1-3K binary decision candidates from:
 - PubMedQA: biomedical research questions with abstract excerpts
@@ -62,7 +62,7 @@ def load_pubmedqa() -> List[Dict]:
 
 def normalize_pubmedqa_to_binary(item: Dict) -> Optional[Dict]:
     """
-    Normalize PubMedQA to BEAT-120 format.
+    Normalize PubMedQA to BEAT-300 format.
     
     Per DESIGN.md §3.2:
     - Task: "Given the abstract excerpt, does the evidence support answering Yes to the question?"
@@ -188,7 +188,7 @@ def load_scifact() -> Tuple[List[Dict], Dict]:
 
 def normalize_scifact_to_binary(item: Dict, corpus: Dict) -> Optional[Dict]:
     """
-    Normalize SciFact to BEAT-120 format.
+    Normalize SciFact to BEAT-300 format.
     
     Per DESIGN.md §3.2:
     - Task: "Given the abstract, does the evidence SUPPORT the claim?"
@@ -454,7 +454,7 @@ def build_candidate_pool(
     }
     """
     print("\n" + "="*60)
-    print("BEAT-120 Candidate Pool Construction")
+    print("BEAT-300 Candidate Pool Construction")
     print("="*60)
     print(f"Target: {target_pubmedqa + target_scifact + target_contractnli} candidates")
     print(f"  - PubMedQA (Medicine): {target_pubmedqa}")
@@ -547,4 +547,4 @@ if __name__ == "__main__":
     )
     
     print(f"\nDone. Collected {len(candidates)} candidates.")
-    print(f"Next step: Run boundary selection to generate BEAT-120")
+    print(f"Next step: Run boundary selection to generate BEAT-300")

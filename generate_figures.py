@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Figure Generation for BEAT-120 Experimental Results
+Figure Generation for BEAT-300 Experimental Results
 
 Implements all 5 main figures from DESIGN.md §9:
 - Figure 1: Condition effects on reversal
@@ -473,7 +473,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
     
     print("=" * 60)
-    print("BEAT-120 Figure Generation")
+    print("BEAT-300 Figure Generation")
     print("=" * 60)
     print(f"Analysis directory: {analysis_dir}")
     print(f"Output directory: {output_dir}")

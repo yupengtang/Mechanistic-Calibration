@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Automatic model downloader for BEAT-120
+Automatic model downloader for BEAT-300
 Downloads all core models sequentially with error handling
 """
 
@@ -179,7 +179,7 @@ def download_model(model_info, device="cuda"):
 
 def main():
     print("\n" + "="*70)
-    print("BEAT-120 Automatic Model Downloader")
+    print("BEAT-300 Automatic Model Downloader")
     print("="*70)
     
     # Check environment

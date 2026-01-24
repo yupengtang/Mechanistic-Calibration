@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Data Structures and Logging Schema for BEAT-120 Experiment
+Data Structures and Logging Schema for BEAT-300 Experiment
 Defines all data structures, JSONL logging format, and utilities.
 """
 
@@ -18,8 +18,8 @@ from datetime import datetime
 class Question:
     """A question in the BEAT-120 benchmark"""
     question_id: str
-    domain: str  # "Medicine", "Science", "Law" (per DESIGN.md §3.2)
-    prompt_base: str  # Base prompt (no A/B/C intervention); stored in frozen_artifacts/beat120_questions.jsonl
+    domain: str  # "Medicine", "Science", "Law" (per DESIGN.md §4.2)
+    prompt_base: str  # Base prompt (no A/B/C intervention); stored in frozen_artifacts/beat300_questions.jsonl
     excerpt: str  # Native evidence excerpt (abstract, contract snippet, etc.)
     hash: str = field(default="")
     metadata: Dict[str, Any] = field(default_factory=dict)
@@ -120,9 +120,9 @@ class TrialRecord:
 
 @dataclass
 class ExperimentConfig:
-    """Configuration for running the BEAT-120 experiment"""
+    """Configuration for running the BEAT-300 experiment"""
     # Paths
-    questions_file: str = "frozen_artifacts/beat120_questions.jsonl"
+    questions_file: str = "frozen_artifacts/beat300_questions.jsonl"
     prompts_registry: str = "prompts/registry.json"
     models_config: str = "frozen_artifacts/models.json"
     output_dir: str = "results"
@@ -247,7 +247,7 @@ def read_jsonl_records(input_file: Path) -> List[TrialRecord]:
 
 
 def load_questions(questions_file: Path) -> List[Question]:
-    """Load BEAT-120 questions from JSONL file"""
+    """Load BEAT-300 questions from JSONL file"""
     questions = []
     with open(questions_file, 'r', encoding='utf-8') as f:
         for line in f:
@@ -288,7 +288,7 @@ def get_commit_hash() -> str:
 # Example usage
 if __name__ == "__main__":
     # Demonstrate data structures
-    print("BEAT-120 Data Structures")
+    print("BEAT-300 Data Structures")
     print("=" * 60)
     
     # Example question

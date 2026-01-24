@@ -10,11 +10,11 @@
 #SBATCH --output=logs/experiment_%j.out
 #SBATCH --error=logs/experiment_%j.err
 
-# BEAT-120 Full Experiment on PACE Phoenix
+# BEAT-300 Full Experiment on PACE Phoenix
 # Runs core experimental protocol with local mechanistic probing
 
 echo "=========================================="
-echo "BEAT-120 Experiment (PACE Phoenix)"
+echo "BEAT-300 Experiment (PACE Phoenix)"
 echo "=========================================="
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $SLURM_NODELIST"
@@ -52,7 +52,7 @@ fi
 
 echo ""
 echo "=========================================="
-echo "Running BEAT-120 Core Experiment"
+echo "Running BEAT-300 Core Experiment"
 echo "=========================================="
 echo ""
 
@@ -63,24 +63,24 @@ if [ "$MODE" = "test" ]; then
     echo "[MODE] Test mode (1 question, 1 replicate)"
     python run_experiment.py \
         --config config.json \
-        --questions frozen_artifacts/beat120_questions_SAMPLE.jsonl \
+        --questions frozen_artifacts/beat300_questions_SAMPLE.jsonl \
         --output results/trials_test.jsonl \
         --device cuda \
         --test-mode
 else
-    echo "[MODE] Core experiment (full BEAT-120)"
+    echo "[MODE] Core experiment (full BEAT-300)"
     
     # Check if full questions file exists
-    if [ ! -f "frozen_artifacts/beat120_questions.jsonl" ]; then
-        echo "[ERROR] beat120_questions.jsonl not found"
+    if [ ! -f "frozen_artifacts/beat300_questions.jsonl" ]; then
+        echo "[ERROR] beat300_questions.jsonl not found"
         echo "[ERROR] You must generate it first using:"
-        echo "        python -m src.beat120_builder --candidates data/candidate_pool.jsonl --output frozen_artifacts/beat120_questions.jsonl"
+        echo "        python -m src.beat300_builder --candidates data/candidate_pool.jsonl --output frozen_artifacts/beat300_questions.jsonl"
         exit 1
     fi
     
     python run_experiment.py \
         --config config.json \
-        --questions frozen_artifacts/beat120_questions.jsonl \
+        --questions frozen_artifacts/beat300_questions.jsonl \
         --output results/trials.jsonl \
         --device cuda
 fi

@@ -144,7 +144,7 @@ def download_model(model_id: str):
 
 def main():
     print("\n" + "="*70)
-    print("BEAT-120 Model Downloader")
+    print("BEAT-300 Model Downloader")
     print("="*70 + "\n")
     
     # Check dependencies

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Analysis Script for BEAT-120 Experimental Results
+Analysis Script for BEAT-300 Experimental Results
 
 Implements:
 - GLMM analysis (primary outcome: reversal)
@@ -401,7 +401,7 @@ def aep_stratification_analysis(df: pd.DataFrame, output_dir: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Analyze BEAT-120 Results")
+    parser = argparse.ArgumentParser(description="Analyze BEAT-300 Results")
     parser.add_argument("--trials", type=str, default="results/trials.jsonl",
                       help="Path to trials JSONL file")
     parser.add_argument("--output-dir", type=str, default="results/analysis",

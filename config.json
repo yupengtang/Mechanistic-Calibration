@@ -1,5 +1,5 @@
 {
-  "questions_file": "frozen_artifacts/beat120_questions.jsonl",
+  "questions_file": "frozen_artifacts/beat300_questions.jsonl",
   "prompts_registry": "prompts/registry.json",
   "models_config": "frozen_artifacts/models.json",
   "output_dir": "results",

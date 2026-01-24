@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Main Entry Point for BEAT-120 Experiment (Version 2 - Fixed)
+Main Entry Point for BEAT-300 Experiment (Version 2 - Fixed)
 
 **KEY FIX**: Implements proper Pass 1 sharing as required by proposal §4.1:
 "For each question, model, temperature, and replicate, the baseline response (Pass 1) 
@@ -249,9 +249,9 @@ def run_pass2_with_shared_baseline(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run BEAT-120 Experiment (v2 - Fixed)")
+    parser = argparse.ArgumentParser(description="Run BEAT-300 Experiment (v2 - Fixed)")
     parser.add_argument("--config", type=str, default="config.json")
-    parser.add_argument("--questions", type=str, default="frozen_artifacts/beat120_questions_SAMPLE.jsonl")
+    parser.add_argument("--questions", type=str, default="frozen_artifacts/beat300_questions_SAMPLE.jsonl")
     parser.add_argument("--prompts", type=str, default="prompts/registry.json")
     parser.add_argument("--models", type=str, default="frozen_artifacts/models.json")
     parser.add_argument("--output", type=str, default="results/trials.jsonl")

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Reasoning Case Study for BEAT-120
+Reasoning Case Study for BEAT-300
 
 Minimal protocol for reasoning-oriented models (o1-preview, o3-mini).
 
-Proposal §5.3:
-- N=24 questions (highest entropy from BEAT-120)
+Proposal §6.2 (reasoning case study):
+- N=24 questions (highest entropy from BEAT-300)
 - 4 conditions only: A1/B0/C1, A3/B0/C1, A1/B2/C1, A3/B2/C1
 - T=0.0, single run per item
 - Reports SSI-Reduction vs baseline (GPT-4o-mini)
@@ -39,7 +39,7 @@ def select_highest_entropy_questions(
     Select N questions with highest entropy from boundary selection.
     
     Args:
-        questions: All BEAT-120 questions
+        questions: All BEAT-300 questions
         selection_log_path: Path to selection_log.jsonl from boundary filtering
         n: Number to select (default: 24)
     
@@ -210,7 +210,7 @@ def run_reasoning_trial(
 def main():
     parser = argparse.ArgumentParser(description="Reasoning Case Study (Minimal Protocol)")
     parser.add_argument("--questions", type=str, 
-                       default="frozen_artifacts/beat120_questions.jsonl")
+                       default="frozen_artifacts/beat300_questions.jsonl")
     parser.add_argument("--selection-log", type=str,
                        default="frozen_artifacts/selection_log.jsonl")
     parser.add_argument("--output", type=str,

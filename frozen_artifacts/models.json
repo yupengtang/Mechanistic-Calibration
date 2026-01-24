@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "description": "Frozen model set for BEAT-120 experiment",
+  "description": "Frozen model set for BEAT-300 experiment",
   
   "mechanistic_probing_set": {
     "description": "Local models with logit access for mechanistic analysis",
@@ -9,14 +9,6 @@
         "model_id": "meta-llama/Llama-3.1-8B-Instruct",
         "family": "Llama",
         "size_b": 8,
-        "provider": "local",
-        "logits_available": true,
-        "purpose": "main_results"
-      },
-      {
-        "model_id": "meta-llama/Llama-3.1-70B-Instruct",
-        "family": "Llama",
-        "size_b": 70,
         "provider": "local",
         "logits_available": true,
         "purpose": "main_results"
@@ -35,61 +27,30 @@
         "size_b": 32,
         "provider": "local",
         "logits_available": true,
-        "purpose": "main_results"
-      }
-    ],
-    "extended": [
-      {
-        "model_id": "meta-llama/Llama-3.1-405B-Instruct",
-        "family": "Llama",
-        "size_b": 405,
-        "provider": "local",
-        "logits_available": true,
-        "purpose": "appendix",
-        "note": "compute_permitting"
-      },
-      {
-        "model_id": "Qwen/Qwen2.5-72B-Instruct",
-        "family": "Qwen",
-        "size_b": 72,
-        "provider": "local",
-        "logits_available": true,
-        "purpose": "appendix",
-        "note": "compute_permitting"
+        "purpose": "exploratory",
+        "note": "Moderate-scale comparison for capacity exploration (RQ4)"
       }
     ]
   },
   
   "behavioral_anchor_set": {
-    "description": "API models for external validity (no logits)",
+    "description": "API models for external validity check (24-item subset, behavioral only)",
     "models": [
       {
-        "model_id": "anthropic/claude-3.5-sonnet",
+        "model_id": "openai/gpt-5.2-instant",
+        "family": "GPT",
+        "provider": "openrouter",
+        "logits_available": false,
+        "purpose": "behavioral_external_validity",
+        "protocol": "24_item_subset"
+      },
+      {
+        "model_id": "anthropic/claude-sonnet-4.5",
         "family": "Claude",
         "provider": "openrouter",
         "logits_available": false,
-        "purpose": "behavioral_comparison"
-      },
-      {
-        "model_id": "openai/gpt-4o-2024-08-06",
-        "family": "GPT-4",
-        "provider": "openrouter",
-        "logits_available": false,
-        "purpose": "behavioral_comparison"
-      },
-      {
-        "model_id": "google/gemini-pro-1.5",
-        "family": "Gemini",
-        "provider": "openrouter",
-        "logits_available": false,
-        "purpose": "behavioral_comparison"
-      },
-      {
-        "model_id": "mistralai/mistral-large-2411",
-        "family": "Mistral",
-        "provider": "openrouter",
-        "logits_available": false,
-        "purpose": "behavioral_comparison"
+        "purpose": "behavioral_external_validity",
+        "protocol": "24_item_subset"
       }
     ]
   },
@@ -133,17 +94,19 @@
   },
   
   "screening_models": {
-    "description": "Models used for BEAT-120 question boundary selection",
+    "description": "Models used for BEAT-300 question boundary selection (same as main core set)",
     "models": [
       {
-        "model_id": "meta-llama/Llama-3.1-70B-Instruct",
+        "model_id": "meta-llama/Llama-3.1-8B-Instruct",
         "provider": "local",
-        "purpose": "boundary_selection"
+        "purpose": "boundary_selection",
+        "note": "Self-consistent screening using main experimental models"
       },
       {
-        "model_id": "openai/gpt-4o-mini",
-        "provider": "openrouter",
-        "purpose": "boundary_selection"
+        "model_id": "Qwen/Qwen2.5-7B-Instruct",
+        "provider": "local",
+        "purpose": "boundary_selection",
+        "note": "Self-consistent screening using main experimental models"
       }
     ]
   }

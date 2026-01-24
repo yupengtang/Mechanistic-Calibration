@@ -89,7 +89,7 @@ def test_model(model_id: str, device: str = "cuda"):
 
 def main():
     print("\n" + "="*60)
-    print("BEAT-120 Model Loading Test")
+    print("BEAT-300 Model Loading Test")
     print("="*60 + "\n")
     
     # Check CUDA
