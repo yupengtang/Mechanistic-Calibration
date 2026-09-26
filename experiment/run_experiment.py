@@ -10,8 +10,8 @@ is sampled once and reused as a shared initial state for all Pass-2 intervention
 
 import os
 
-# Set HuggingFace cache to project directory
-HF_HOME = "/storage/project/r-pkastner3-0/ytang454/hf_cache"
+# Respect an explicit cache location and otherwise use the Hugging Face default.
+HF_HOME = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
 os.environ["HF_HOME"] = HF_HOME
 os.environ["HUGGINGFACE_HUB_CACHE"] = os.path.join(HF_HOME, "hub")
 os.environ["TRANSFORMERS_CACHE"] = os.path.join(HF_HOME, "transformers")
@@ -427,4 +427,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

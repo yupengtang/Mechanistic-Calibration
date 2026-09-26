@@ -3,17 +3,15 @@
 
 set -e
 
-# Set HuggingFace cache to project directory
-export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
-export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
-export TRANSFORMERS_CACHE=$HF_HOME/transformers
-mkdir -p $HF_HOME
+# Set HF_HOME and PYTHONUSERBASE before running to use shared storage.
+export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
+export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME/transformers}"
+mkdir -p "$HF_HOME"
 
-# Set pip install location to project directory (home has limited quota)
-export PYTHONUSERBASE=/storage/project/r-pkastner3-0/ytang454/python_packages
-export PATH=$PYTHONUSERBASE/bin:$PATH
-export PYTHONPATH=$PYTHONUSERBASE/lib/python3.9/site-packages:$PYTHONPATH
-mkdir -p $PYTHONUSERBASE
+export PYTHONUSERBASE="${PYTHONUSERBASE:-$HOME/.local}"
+export PATH="$PYTHONUSERBASE/bin:$PATH"
+mkdir -p "$PYTHONUSERBASE"
 
 echo "=========================================="
 echo "BEAT-120 Step-by-Step Installation"

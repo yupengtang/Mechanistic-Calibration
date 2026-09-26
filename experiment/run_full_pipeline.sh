@@ -3,11 +3,10 @@
 
 set -e
 
-# Set HuggingFace cache to project directory
-export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
-export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
-export TRANSFORMERS_CACHE=$HF_HOME/transformers
-mkdir -p $HF_HOME
+export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
+export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME/transformers}"
+mkdir -p "$HF_HOME"
 
 echo "======================================================"
 echo "BEAT-300 Experimental Pipeline"
@@ -76,4 +75,3 @@ echo "  • Review results/analysis/summary_by_condition.csv"
 echo "  • Check results/analysis/ssi_behavioral.csv for SSI"
 echo "  • Generate figures (see EXPERIMENTS.md)"
 echo "======================================================"
-

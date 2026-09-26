@@ -8,13 +8,13 @@ import sys
 import json
 from pathlib import Path
 
-# Set environment
-HF_HOME = "/storage/project/r-pkastner3-0/ytang454/hf_cache"
+# Respect caller-provided cache and package locations.
+HF_HOME = os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface"))
 os.environ["HF_HOME"] = HF_HOME
 os.environ["HUGGINGFACE_HUB_CACHE"] = os.path.join(HF_HOME, "hub")
 os.environ["TRANSFORMERS_CACHE"] = os.path.join(HF_HOME, "transformers")
 
-PYTHONUSERBASE = "/storage/project/r-pkastner3-0/ytang454/python_packages"
+PYTHONUSERBASE = os.environ.get("PYTHONUSERBASE", os.path.expanduser("~/.local"))
 os.environ["PYTHONUSERBASE"] = PYTHONUSERBASE
 
 print("="*70)

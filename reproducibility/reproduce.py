@@ -169,7 +169,7 @@ def main():
         current.append([NAMES[model], f"{len(w.A0.dropna())}/{len(w.A1.dropna())}/{len(w.A3.dropna())}", len(pair),
                         f"{100*pair.A1.mean():.1f}", f"{100*pair.A3.mean():.1f}",
                         f"{100*(pair.A3-pair.A1).mean():+.2f}", f"{100*(g3.pass2_correct.mean()-g3.pass1_correct.mean()):+.1f}"])
-    table("current_counts.tex", r"Newer-model retention out of 250 attempted items. $P$ and reversal rates use the A1/A3 intersection; $\Delta$accuracy uses all valid $A_3$ outputs.",
+    table("current_counts.tex", r"Retention for the four additional models out of 250 attempted items each. $P$ and reversal rates use the A1/A3 intersection; $\Delta$accuracy uses all valid $A_3$ outputs.",
           "tab:current_counts", "llrcccc", ["Model", "$N_0/N_1/N_3$", "$N_{13}$", "$A_1$", "$A_3$", "$P$", "$\Delta$acc."], current)
     for name, data in zip(["logit_mechanism_by_condition.csv", "logit_boundary_buckets.csv"], logits.logit_mechanism(df)):
         data.to_csv(OUT / name, index=False)

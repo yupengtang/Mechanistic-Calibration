@@ -22,6 +22,7 @@ wheels/
 
 # Virtual environments
 venv/
+.venv/
 env/
 ENV/
 
@@ -33,17 +34,17 @@ ENV/
 results/
 logs/
 *.jsonl
-!frozen_artifacts/*.jsonl
+!experiment/frozen_artifacts/*.jsonl
 
 # Data
-data/*.jsonl
-data/*.txt
-!data/README.md
+experiment/data/*.jsonl
+experiment/data/*.txt
+!experiment/data/README.md
 
 # Figures
-figures/*.png
-figures/*.pdf
-!figures/README.md
+experiment/figures/*.png
+experiment/figures/*.pdf
+!experiment/figures/README.md
 
 # R
 .Rhistory

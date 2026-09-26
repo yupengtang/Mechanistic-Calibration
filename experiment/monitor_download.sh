@@ -2,6 +2,7 @@
 # Monitor model download progress
 
 JOBID=$1
+HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
 
 if [ -z "$JOBID" ]; then
     echo "Usage: bash monitor_download.sh <job_id>"
@@ -48,4 +49,4 @@ fi
 
 echo ""
 echo "Cache status:"
-du -sh /storage/project/r-pkastner3-0/ytang454/hf_cache/ 2>/dev/null || echo "  Cache directory empty"
+du -sh "$HF_HOME" 2>/dev/null || echo "  Cache directory empty"

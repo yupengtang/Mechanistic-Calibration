@@ -6,7 +6,7 @@ Authors: Yupeng Tang and Mingfeng Lin, Georgia Institute of Technology.
 
 This archive accompanies the camera-ready paper. It supports numerical verification from saved outputs without credentials, GPU access, internet access at analysis time, or paid API calls. It is not a complete end-to-end rerun package for the original benchmark.
 
-Original experiment code: https://github.com/yupengtang/when-expert-disagreement-hurts (public access verified September 25, 2026). This supplementary archive separately supplies the camera-ready saved-output analyses and follow-up records; the repository link does not replace it.
+Original experiment code: https://github.com/yupengtang/when-expert-disagreement-hurts (public access verified September 26, 2026). This supplementary archive separately supplies the camera-ready saved-output analyses and follow-up records; the repository link does not replace it.
 
 ## Run
 

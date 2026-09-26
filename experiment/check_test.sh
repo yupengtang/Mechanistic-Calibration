@@ -6,7 +6,7 @@ echo "Test Job Status"
 echo "=========================================="
 
 # Get latest test job
-JOB_ID=$(squeue -u ytang454 -n beat300_test_1q -h -o "%i" | head -1)
+JOB_ID=$(squeue -u "$USER" -n beat300_test_1q -h -o "%i" | head -1)
 
 if [ -z "$JOB_ID" ]; then
     echo "[INFO] No running test job found"
@@ -27,7 +27,7 @@ else
     squeue -j $JOB_ID
     echo ""
     echo "Monitor with:"
-    echo "  watch -n 5 squeue -u ytang454"
+    echo "  watch -n 5 squeue -u $USER"
     echo ""
     echo "View output when complete:"
     echo "  cat logs/test_one_question_${JOB_ID}.out"

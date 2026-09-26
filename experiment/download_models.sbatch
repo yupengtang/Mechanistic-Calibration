@@ -21,15 +21,14 @@ echo "Node: $SLURM_NODELIST"
 echo "Start time: $(date)"
 echo ""
 
-# Set environment (models + packages in project directory)
-export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
-export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
-export TRANSFORMERS_CACHE=$HF_HOME/transformers
-export PYTHONUSERBASE=/storage/project/r-pkastner3-0/ytang454/python_packages
-export PATH=$PYTHONUSERBASE/bin:$PATH
-export PYTHONPATH=$PYTHONUSERBASE/lib/python3.9/site-packages:$PYTHONPATH
+# Set HF_HOME and PYTHONUSERBASE at submission time to use shared storage.
+export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
+export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME/transformers}"
+export PYTHONUSERBASE="${PYTHONUSERBASE:-$HOME/.local}"
+export PATH="$PYTHONUSERBASE/bin:$PATH"
 
-mkdir -p $HF_HOME
+mkdir -p "$HF_HOME"
 mkdir -p logs
 
 echo "[OK] HuggingFace cache: $HF_HOME"

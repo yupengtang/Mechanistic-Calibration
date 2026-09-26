@@ -4,11 +4,10 @@
 
 set -e
 
-# Set HuggingFace cache to project directory
-export HF_HOME=/storage/project/r-pkastner3-0/ytang454/hf_cache
-export HUGGINGFACE_HUB_CACHE=$HF_HOME/hub
-export TRANSFORMERS_CACHE=$HF_HOME/transformers
-mkdir -p $HF_HOME
+export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
+export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
+export TRANSFORMERS_CACHE="${TRANSFORMERS_CACHE:-$HF_HOME/transformers}"
+mkdir -p "$HF_HOME"
 
 echo "======================================================"
 echo "BEAT-300 Core Experiment"
@@ -91,4 +90,3 @@ echo "Next steps:"
 echo "  1. Analyze results: bash analyze_all.sh"
 echo "  2. Generate figures: python generate_figures.py"
 echo "======================================================"
-
