@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When Expert Disagreement Hurts — NeurIPS 2026</title>
+  <meta name="description" content="A branch-paired audit of prestige-sensitive revision in language-model decision pipelines. NeurIPS 2026.">
+  <meta name="theme-color" content="#f8f7f2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="When Expert Disagreement Hurts">
+  <meta property="og:description" content="Auditing prestige-sensitive revision in LLM decision pipelines.">
+  <meta property="og:url" content="https://yupengtang.github.io/Mechanistic-Calibration/">
+  <meta property="og:image" content="https://yupengtang.github.io/Mechanistic-Calibration/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="wordmark" href="#top" aria-label="Mechanistic Calibration home">
+        <span class="wordmark-mark" aria-hidden="true"><i></i><i></i></span>
+        <span>Mechanistic Calibration</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu>
+        <span></span><span></span><span></span><span class="sr-only">Open navigation</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Primary navigation" data-nav>
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#artifact">Artifact</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <div class="venue-line"><span>NeurIPS 2026</span><span class="venue-divider"></span><span>Accepted paper</span></div>
+          <h1>When Expert<br><em>Disagreement</em> Hurts</h1>
+          <p class="subtitle">Auditing Prestige-Sensitive Revision in LLM Decision Pipelines</p>
+          <div class="authors">
+            <a href="https://github.com/yupengtang">Yupeng Tang</a>
+            <span aria-hidden="true">·</span>
+            <a href="https://mlin.scheller.gatech.edu/">Mingfeng Lin</a>
+          </div>
+          <p class="affiliation">Georgia Institute of Technology</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="assets/paper.pdf">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6zM14 2v5h5M9 12h6M9 16h6"/></svg>
+              Paper
+            </a>
+            <a class="button" href="https://github.com/yupengtang/Mechanistic-Calibration">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg>
+              Code
+            </a>
+            <a class="button" href="https://github.com/yupengtang/Mechanistic-Calibration/releases/latest">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v4h16v-4"/></svg>
+              Data &amp; artifact
+            </a>
+          </div>
+        </div>
+
+        <div class="audit-demo reveal" data-delay="1" aria-label="Illustration of the branch-paired audit">
+          <div class="demo-topline"><span>One fixed decision state</span><span>Three revision contexts</span></div>
+          <article class="evidence-card">
+            <span class="card-label">Evidence excerpt + question</span>
+            <span class="evidence-line long"></span><span class="evidence-line"></span><span class="evidence-line short"></span>
+            <div class="initial-answer"><span>Pass 1</span><strong>Yes</strong></div>
+          </article>
+          <div class="branch-stem" aria-hidden="true"><span></span></div>
+          <div class="branch-list" data-branches>
+            <button class="branch branch-neutral is-active" type="button" data-branch="neutral">
+              <span class="branch-id">A<sub>0</sub></span>
+              <span><strong>Reflection</strong><small>No opponent</small></span>
+              <span class="branch-answer">Yes</span>
+            </button>
+            <button class="branch branch-anon" type="button" data-branch="anonymous">
+              <span class="branch-id">A<sub>1</sub></span>
+              <span><strong>Anonymous</strong><small>Opposing answer: No</small></span>
+              <span class="branch-answer">Yes</span>
+            </button>
+            <button class="branch branch-expert" type="button" data-branch="expert">
+              <span class="branch-id">A<sub>3</sub></span>
+              <span><strong>Expert-labeled</strong><small>Same opposing answer: No</small></span>
+              <span class="branch-answer flipped">No</span>
+            </button>
+          </div>
+          <p class="demo-note" data-demo-note>Only the revision context changes; the evidence and initial answer remain fixed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics-band" aria-label="Study summary">
+      <div class="shell metrics-grid">
+        <div><strong>1,989</strong><span>evidence-grounded decisions</span></div>
+        <div><strong>9</strong><span>language models evaluated</span></div>
+        <div><strong>3</strong><span>professional domains</span></div>
+        <div><strong>Branch-paired</strong><span>within-item comparisons</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="shell narrow reveal">
+        <div class="section-kicker">Research question</div>
+        <h2>Does a model revise because of the evidence—or because the disagreement sounds authoritative?</h2>
+        <p class="lead">We study decision revision under fixed evidence. A model answers once, then reconsiders the same question under controlled contexts: reflection without an opponent, disagreement from an unnamed assistant, or the same disagreement from an assistant described as specialized in the domain.</p>
+        <p>The resulting contrast isolates an operational expert-label effect relative to anonymous disagreement. It does not assume that revisions are uniformly harmful: every analysis separates corrections from accuracy-degrading reversals.</p>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="method">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Audit design</div><h2>Hold the decision problem fixed. Vary the source cue.</h2></div>
+          <p>Each item-model trial generates Pass 1 once. All Pass-2 branches reuse that answer, so the principal contrasts are paired within the same item and initial decision.</p>
+        </div>
+        <div class="method-grid reveal">
+          <div class="method-steps">
+            <article><span>01</span><div><h3>Initial decision</h3><p>The model answers a binary question using only a supplied evidence excerpt.</p></div></article>
+            <article><span>02</span><div><h3>Shared branching point</h3><p>The same Pass-1 answer is reused across all revision conditions.</p></div></article>
+            <article><span>03</span><div><h3>Controlled disagreement</h3><p>Anonymous and expert-labeled sources provide the same opposing answer.</p></div></article>
+            <article><span>04</span><div><h3>Direction-aware evaluation</h3><p>Correct→Wrong and Wrong→Correct transitions are reported separately.</p></div></article>
+          </div>
+          <figure class="paper-figure figure-card">
+            <img src="assets/methodology.svg" alt="Diagram of the two-pass branch-paired audit protocol" loading="lazy">
+            <figcaption>The branch-paired protocol used in the full audit.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Results</div><h2>Disagreement changes answers; the source label changes some models further.</h2></div>
+          <p>The main results combine additive and relative effects, transition direction, final accuracy, and conditional reversal rates. The paper does not use raw reversal as a stand-alone failure measure.</p>
+        </div>
+
+        <div class="finding-grid reveal">
+          <article class="finding"><span class="finding-index">01</span><h3>Disagreement exceeds drift</h3><p>Across the five full-benchmark models, both anonymous and expert-labeled disagreement produce more revision than neutral reconsideration.</p></article>
+          <article class="finding"><span class="finding-index">02</span><h3>Expert labels have heterogeneous effects</h3><p>Four full-benchmark models increase reversal by 2.6–6.9 points; Gemini-2.0-Flash has a negative aggregate effect.</p></article>
+          <article class="finding"><span class="finding-index">03</span><h3>Direction matters</h3><p>Expert disagreement lowers final accuracy by 1.9–16.1 points on the full benchmark, but some reversals correct initial errors.</p></article>
+        </div>
+
+        <figure class="wide-figure reveal">
+          <div class="figure-toolbar"><div><span class="figure-number">Figure 1</span><h3>Transition composition under expert disagreement</h3></div><a href="assets/paper.pdf#page=7">View in paper</a></div>
+          <img src="assets/transitions.svg" alt="Stacked bars showing stable correct, beneficial reversal, harmful reversal, and stable wrong outcomes for nine models" loading="lazy">
+          <figcaption>The first five models use the full 1,989-item benchmark. The remaining four use the 250-item pool and a different prompt protocol; the two groups should not be read as a cross-generation ranking.</figcaption>
+        </figure>
+
+        <div class="figure-pair">
+          <figure class="wide-figure reveal">
+            <div class="figure-toolbar"><div><span class="figure-number">Figure 2</span><h3>Reversal rates and paired expert-label effects</h3></div></div>
+            <img src="assets/reversal.svg" alt="Reversal rates under reflection, anonymous disagreement, and expert disagreement, with paired expert-label effects" loading="lazy">
+            <figcaption>Intervals use paired item bootstrap. Exact sample sizes and McNemar tests are reported in the paper.</figcaption>
+          </figure>
+          <aside class="interpretation reveal" data-delay="1">
+            <div class="section-kicker">Interpretation</div>
+            <h3>Prestige sensitivity is an audit target, not a model ranking.</h3>
+            <p>Endpoint, date, item coverage, prompt scaffold, and decoding settings all matter. The additional four models therefore extend model coverage without being pooled with the full-benchmark experiment.</p>
+            <a class="text-link" href="assets/paper.pdf#page=8">Read the statistical interpretation <span>→</span></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="controls">
+      <div class="shell">
+        <div class="section-head light reveal">
+          <div><div class="section-kicker">Rationale control</div><h2>The source-label comparison survives a stricter prompt design, but its size is model-dependent.</h2></div>
+          <p>Anonymous and expert-labeled opponents receive the same saved rationale. The no-padding protocol removes the active filler used in earlier controls, while still retaining the unavoidable wording difference in the source description.</p>
+        </div>
+        <div class="control-layout">
+          <figure class="dark-figure reveal">
+            <img src="assets/rationale.svg" alt="Paired expert-label and gate effects in the no-padding rationale control across seven models" loading="lazy">
+          </figure>
+          <div class="control-notes reveal" data-delay="1">
+            <div class="control-stat"><strong>+4.4 to +5.6 pp</strong><span>source-label effects for the three original API models</span></div>
+            <div class="control-stat"><strong>+1.2 to +2.4 pp</strong><span>point estimates for four additional endpoints; no per-model exact test reaches 0.05</span></div>
+            <div class="control-stat"><strong>Model-dependent</strong><span>evidence gating is not a uniform reduction in harmful revision</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="artifact">
+      <div class="shell artifact-grid">
+        <div class="reveal">
+          <div class="section-kicker">Reproducibility artifact</div>
+          <h2>Verify the reported results without re-querying an API.</h2>
+          <p class="lead-small">The release contains de-duplicated trial outputs, follow-up records, prompt-construction source, generated stimuli, analysis code, and a manifest of input hashes.</p>
+          <div class="artifact-points">
+            <span><i></i>Saved-output numerical verification</span>
+            <span><i></i>67 CSV/LaTeX outputs reproduced byte for byte</span>
+            <span><i></i>No credentials, paid calls, or GPU required</span>
+            <span><i></i>Known input-recovery limits documented</span>
+          </div>
+          <a class="button button-primary" href="https://github.com/yupengtang/Mechanistic-Calibration/tree/main/reproducibility">Browse the reproducibility package</a>
+        </div>
+        <div class="code-window reveal" data-delay="1" aria-label="Commands for reproducing the camera-ready analyses">
+          <div class="code-title"><span></span><span></span><span></span><b>reproduce.sh</b></div>
+          <pre><code>git clone https://github.com/yupengtang/Mechanistic-Calibration.git
+cd Mechanistic-Calibration/reproducibility
+
+python -m pip install -r requirements.txt
+python reproduce.py
+python make_figures.py</code></pre>
+          <div class="code-foot">Analysis only · no network calls</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="citation">
+      <div class="shell citation-grid">
+        <div class="reveal"><div class="section-kicker">Citation</div><h2>Cite this work</h2><p>Proceedings metadata can be updated after the final NeurIPS volume is published.</p></div>
+        <div class="bibtex-card reveal" data-delay="1">
+          <button class="copy-button" type="button" data-copy>Copy BibTeX</button>
+          <pre id="bibtex"><code>@inproceedings{tang2026expert,
+  title     = {When Expert Disagreement Hurts: Auditing
+               Prestige-Sensitive Revision in LLM Decision Pipelines},
+  author    = {Tang, Yupeng and Lin, Mingfeng},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div><strong>When Expert Disagreement Hurts</strong><span>NeurIPS 2026</span></div>
+      <p>Yupeng Tang and Mingfeng Lin<br>Georgia Institute of Technology</p>
+      <div class="footer-links"><a href="assets/paper.pdf">Paper</a><a href="https://github.com/yupengtang/Mechanistic-Calibration">Code</a><a href="mailto:ytang454@gatech.edu">Contact</a></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

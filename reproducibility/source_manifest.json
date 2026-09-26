@@ -1,0 +1,236 @@
+[
+  {
+    "path": "rebuttal/data/controls.jsonl",
+    "source": "rebuttal/data/controls.jsonl",
+    "bytes": 17871674,
+    "sha256": "abe879406c1456c7a801026f1fa7b44b4679145fd446023e53f46830d87b4c5f"
+  },
+  {
+    "path": "rebuttal/data/controls_rat_fixed.jsonl",
+    "source": "rebuttal/data/controls_rat_fixed.jsonl",
+    "bytes": 3801337,
+    "sha256": "49bb9d5b63702aea878d213a82417294e688e7447e55ec249e8ed2aa3e6ecbf5"
+  },
+  {
+    "path": "rebuttal/data/controls_open.jsonl",
+    "source": "rebuttal/data/controls_open.jsonl",
+    "bytes": 15139039,
+    "sha256": "64e5f53add0b43b572e7b00cfec30805a495c6abc58d4c6f34f81a3a2b2a58e3"
+  },
+  {
+    "path": "rebuttal/data/controls_open_rat_fixed.jsonl",
+    "source": "rebuttal/data/controls_open_rat_fixed.jsonl",
+    "bytes": 3108976,
+    "sha256": "ce6949c8ff74e36a2c9d4c809513586d28aa3c7b2f87dcdf9ef0f06f0ffffd01"
+  },
+  {
+    "path": "rebuttal/data/controls_sota.jsonl",
+    "source": "rebuttal/data/controls_sota.jsonl",
+    "bytes": 9630021,
+    "sha256": "1cc481b928d62af2ba1ccda342d097b43136b85289d520e1cc54a71182d94adc"
+  },
+  {
+    "path": "rebuttal/data/controls_sota_rat_fixed.jsonl",
+    "source": "rebuttal/data/controls_sota_rat_fixed.jsonl",
+    "bytes": 2035651,
+    "sha256": "378995c050199713dc79d456ff8bd91a74c54c5f088e8a90cd37785fe0144c7e"
+  },
+  {
+    "path": "rebuttal/data/controls_t0.jsonl",
+    "source": "rebuttal/data/controls_t0.jsonl",
+    "bytes": 8926593,
+    "sha256": "9d7b9c6a412f135d4a4ced54a568b8e3b8ac7d2c057ba3d7ed0abdb7415a2bf5"
+  },
+  {
+    "path": "rebuttal/data/controls_t0_rat_fixed.jsonl",
+    "source": "rebuttal/data/controls_t0_rat_fixed.jsonl",
+    "bytes": 1901501,
+    "sha256": "2c7201c4ea4c0ec9c59a3d3ad49f6570d27ac7cbcd7da781ba4d94b3ac84906b"
+  },
+  {
+    "path": "rebuttal/data/clean_rationale_250_dedup.jsonl",
+    "source": "rebuttal/data/clean_rationale_250_dedup.jsonl",
+    "bytes": 3044122,
+    "sha256": "ba447504c862969cd6b82fa4e8547733ef9d6dd605c41d8e0012ea56452d7bab"
+  },
+  {
+    "path": "rebuttal/data/gradient_main.jsonl",
+    "source": "rebuttal/data/gradient_main.jsonl",
+    "bytes": 3501106,
+    "sha256": "05c1b272d09754e499be7f4dc04bfa5197545d30e11a12f93387604540fd84a9"
+  },
+  {
+    "path": "rebuttal/data/gradient_sota.jsonl",
+    "source": "rebuttal/data/gradient_sota.jsonl",
+    "bytes": 902464,
+    "sha256": "24ec13edfde19580edf3cef2bcc0c8d3bf32ba0735e61ff904040281c485a90f"
+  },
+  {
+    "path": "rebuttal/data/temporal_orig_pipeline.jsonl",
+    "source": "rebuttal/data/temporal_orig_pipeline.jsonl",
+    "bytes": 173749,
+    "sha256": "96426ad2779899e832dd8af465b1fe1aad1cc0866172931eeb599af57f623b56"
+  },
+  {
+    "path": "rebuttal/data/rebuttal_items.jsonl",
+    "source": "rebuttal/data/rebuttal_items.jsonl",
+    "bytes": 1549432,
+    "sha256": "39dff390482f8461e4cb1de01620d05d922aaf7c5b2a3a8a1e5ed10c5caf40f0"
+  },
+  {
+    "path": "rebuttal/data/opponent_rationales.json",
+    "source": "rebuttal/data/opponent_rationales.json",
+    "bytes": 471510,
+    "sha256": "37b4ee0466ce19ce680a0e4ec465451673df47f3b967d34dc8420a6db3d46eb3"
+  },
+  {
+    "path": "rebuttal/data/clean_rationale_sota_20260926.jsonl",
+    "source": "rebuttal/data/clean_rationale_sota_20260926.jsonl",
+    "bytes": 26253347,
+    "sha256": "05d2272cbc15fa7206b142a3818763dfa3f2793e04370325b4584e1e6a070078"
+  },
+  {
+    "path": "rebuttal/data/clean_rationale_sota_20260926.manifest.json",
+    "source": "rebuttal/data/clean_rationale_sota_20260926.manifest.json",
+    "bytes": 19130,
+    "sha256": "3aeb240ce035bb9739befd8a71201d31f56525df8023c1c53c5a1653bbd70518"
+  },
+  {
+    "path": "rebuttal/analyze_main_audit.py",
+    "source": "rebuttal/analyze_main_audit.py",
+    "bytes": 13740,
+    "sha256": "18c533c1806fc42b98c7e30005a2bce02d80bb52adc53fa3d5a1063340e85c1f"
+  },
+  {
+    "path": "rebuttal/analyze_controls.py",
+    "source": "rebuttal/analyze_controls.py",
+    "bytes": 13689,
+    "sha256": "015de6ef65e89abe12a235ce647781cf1f04c705f4d044bc0433064e05da4cd6"
+  },
+  {
+    "path": "rebuttal/analyze_clean_rationale_controls.py",
+    "source": "rebuttal/analyze_clean_rationale_controls.py",
+    "bytes": 5042,
+    "sha256": "a9b2de51e821b9286ea869992558d3ead8bb5db669cc4ba3f1b19134e08f530d"
+  },
+  {
+    "path": "rebuttal/analyze_gemini_and_accuracy.py",
+    "source": "rebuttal/analyze_gemini_and_accuracy.py",
+    "bytes": 3940,
+    "sha256": "c9a781eb54ba50ea2677d8fe68838a2c996a23e1b854312208da9bf9d20b1572"
+  },
+  {
+    "path": "rebuttal/analyze_derived_and_logits.py",
+    "source": "rebuttal/analyze_derived_and_logits.py",
+    "bytes": 7074,
+    "sha256": "1fbc203a1a6dcb744e27d10145643531b60a72f7fe3806cc6d37a8f42ef07220"
+  },
+  {
+    "path": "rebuttal/analyze_credibility_gradient.py",
+    "source": "rebuttal/analyze_credibility_gradient.py",
+    "bytes": 3011,
+    "sha256": "cd17bde9c7df7cdbea787bdfa1bcec285ba9743187a04b55243d9b1a245dfb03"
+  },
+  {
+    "path": "rebuttal/analyze_temporal_original_pipeline.py",
+    "source": "rebuttal/analyze_temporal_original_pipeline.py",
+    "bytes": 2316,
+    "sha256": "bace43f8d229e35fe32eaeefe93eefa04c9a53d7debbaf2d42ac3f81e9d2195b"
+  },
+  {
+    "path": "prompt_source/run_controls.py",
+    "source": "rebuttal/run_controls.py",
+    "bytes": 11654,
+    "sha256": "1d4c7fe8ab37aecbdc2fe545102ecff9254b5872625e546979044f0a7b414b98"
+  },
+  {
+    "path": "prompt_source/run_clean_rationale_controls.py",
+    "source": "rebuttal/run_clean_rationale_controls.py",
+    "bytes": 8908,
+    "sha256": "1821dfb19b3b3b76189f68e90588b536fc721acac112f1ed78ec0a58e8061f40"
+  },
+  {
+    "path": "prompt_source/run_credibility_gradient.py",
+    "source": "rebuttal/run_credibility_gradient.py",
+    "bytes": 7128,
+    "sha256": "56299a97b424c3ac4ec7d13d1b64774ee54f3bc7815ba65166cff746b7ca2bcd"
+  },
+  {
+    "path": "prompt_source/gen_opponent_rationales.py",
+    "source": "rebuttal/gen_opponent_rationales.py",
+    "bytes": 5029,
+    "sha256": "8f7dadd093d3839a35ee629396575032eb14847f1adfef9303161a5e4de0c0af"
+  },
+  {
+    "path": "prompt_source/fix_opponent_rationales.py",
+    "source": "rebuttal/fix_opponent_rationales.py",
+    "bytes": 5502,
+    "sha256": "8f1717fb8b36c436295ea14fef2f87612bb96f5f868f35b6f50e079ee410033b"
+  },
+  {
+    "path": "prompt_source/rerun_rationale.py",
+    "source": "rebuttal/rerun_rationale.py",
+    "bytes": 5504,
+    "sha256": "f5cdfcf256323bcd99941bcebeb3971649a21a88226d89ad90d94335aede7995"
+  },
+  {
+    "path": "prompt_source/verify_temporal_original_pipeline.py",
+    "source": "rebuttal/verify_temporal_original_pipeline.py",
+    "bytes": 5693,
+    "sha256": "0a3ffca701b8509cbd1c832422853813b8cb438c15a0374be8d0fd4d4ca1e87b"
+  },
+  {
+    "path": "prompt_source/run_budgeted_clean.py",
+    "source": "rebuttal/run_budgeted_clean.py",
+    "bytes": 9022,
+    "sha256": "c408328ea3a5d00db9c5603934880d98b997d4c16c038926c0b51d2bd1c79d17"
+  },
+  {
+    "path": "LICENSE",
+    "source": "LICENSE",
+    "bytes": 1062,
+    "sha256": "e5f4bfdbaa06633c08616a2e4a361c620ac11b8b815af39a15c9269d404c9b31"
+  },
+  {
+    "path": "plot_source.py",
+    "source": "NeurIPS_2026__Mechanistic_Calibration_/make_neurips_tables.py",
+    "bytes": 15991,
+    "sha256": "0bff63400548c2aa7cb04c35178edc060e888c1c5d609c644efafa6e7351ca67"
+  },
+  {
+    "path": "rebuttal/data/recovered/neurips_dedup_trials_FULL.csv",
+    "source": "rebuttal/data/recovered/neurips_dedup_trials_FULL.csv",
+    "bytes": 3256204,
+    "sha256": "6d0e86e6f963cb50105c53bec37bdb1547e466fe959317609c0b7290e9a45660"
+  },
+  {
+    "path": "rebuttal/data/recovered/beat_full_questions_RECOVERED.jsonl",
+    "source": "rebuttal/data/recovered/beat_full_questions_RECOVERED.jsonl",
+    "bytes": 3250483,
+    "sha256": "7aa83ec8b0664f6c0a954c2a3ca6f98d4aabb11afb4751c1927ee8cc0f68a7dd"
+  },
+  {
+    "path": "rebuttal/data/recovered/neurips_mitigation_summary.csv",
+    "source": "rebuttal/data/recovered/neurips_mitigation_summary.csv",
+    "bytes": 656,
+    "sha256": "d3d16058a61192c0bf2e217eaf176e247dd86d988a403ef8a0ff4f0e0537a06d"
+  },
+  {
+    "path": "rebuttal/data/recovered/prestige_control_summary.csv",
+    "source": "rebuttal/data/recovered/prestige_control_summary.csv",
+    "bytes": 966,
+    "sha256": "7df7a1be443128856e6342ceafcb269a0e040559e2c0553d81fb37ec00d7495e"
+  },
+  {
+    "path": "rebuttal/data/recovered/prestige_control_summary_t0.csv",
+    "source": "rebuttal/data/recovered/prestige_control_summary_t0.csv",
+    "bytes": 1001,
+    "sha256": "42efa5bc724aeb2b2e83361ceaa43438b6b1219c24683b3d99ae7de87f47d279"
+  },
+  {
+    "path": "prompt_source/registry.json",
+    "source": "prompts/registry.json",
+    "bytes": 5456,
+    "sha256": "e5641d948647062525164103cc780fd3b0166cb1b62335df0a1af2bf7a012b3b"
+  }
+]
