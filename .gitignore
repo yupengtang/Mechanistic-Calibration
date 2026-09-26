@@ -35,6 +35,7 @@ results/
 logs/
 *.jsonl
 !experiment/frozen_artifacts/*.jsonl
+!reproducibility/data-repair/outputs/*.jsonl
 
 # Data
 experiment/data/*.jsonl

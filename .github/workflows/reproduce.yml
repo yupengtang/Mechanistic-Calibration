@@ -31,6 +31,8 @@ jobs:
       - name: Reproduce tables and analyses
         working-directory: reproducibility
         run: python reproduce.py
+      - name: Verify input recovery and complete evidence spans
+        run: python -m unittest discover -s reproducibility/data-repair -p 'test_*.py' -v
       - name: Verify checked-in numerical outputs
         run: git diff --exit-code -- reproducibility/rebuttal/analysis reproducibility/tables
       - name: Regenerate figures

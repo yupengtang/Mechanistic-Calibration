@@ -28,7 +28,7 @@ python make_figures.py
 
 The reproduction script regenerates 67 CSV and LaTeX outputs from the released records. The repository [CI workflow](.github/workflows/reproduce.yml) runs the same analysis and checks the tracked numerical outputs for changes.
 
-The surviving records support the numerical results in the paper. They do not support a complete fresh generation of the original benchmark because two Medicine inputs and the 800 original Law inputs could not be recovered. The exact coverage and provenance are documented in [`reproducibility/README.md`](reproducibility/README.md).
+All 1,989 original question–excerpt pairs are now recovered. The [input audit](reproducibility/data-repair/README.md) verifies their provenance and provides separately versioned evidence-complete inputs: 48 original Law excerpts and 16 control Law excerpts required expansion. Historical results are preserved; repaired inputs require fresh model calls and must not be paired with old outputs. The same audit corrects 96 Science question associations in an earlier reconstructed input file, without changing the original saved trial outputs.
 
 ## Repository structure
 
