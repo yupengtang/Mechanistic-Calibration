@@ -99,6 +99,9 @@ figure { margin: 0; }
 .method-steps p { margin: 0; font-size: 12px; color: var(--muted); }
 .figure-card { width: 100%; padding: 32px; background: white; border: 1px solid var(--line); border-radius: 5px; }
 .paper-figure img { width: 100%; }
+.methodology-vector { display: block; width: 100%; aspect-ratio: 42469 / 23901; border: 0; }
+.figure-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-size: 12px; }
+.figure-actions button { padding: 0; border: 0; color: inherit; background: none; text-decoration: underline; text-underline-offset: 4px; }
 figcaption { margin-top: 18px; color: var(--muted); font-size: 12px; line-height: 1.7; max-width: 880px; }
 .finding-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-bottom: 42px; }
 .finding { padding: 24px 0; border-top: 1px solid var(--line); }
@@ -169,6 +172,7 @@ footer { padding: 36px 0; background: var(--paper); }
 .dialog-toolbar button { padding: 7px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 3px; }
 .dialog-image { overflow: auto; }
 .dialog-image img { width: 100%; min-width: 850px; }
+.dialog-image .methodology-vector { min-width: 850px; }
 .figure-dialog > p { font-size: 12px; color: var(--muted); margin-bottom: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .reveal.is-visible { animation: arrive .55s both; }

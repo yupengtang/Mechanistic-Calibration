@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
   <link rel="canonical" href="https://yupengtang.github.io/when-expert-disagreement-hurts/">
-  <link rel="stylesheet" href="styles.css?v=20260926-editorial">
+  <link rel="stylesheet" href="styles.css?v=20260926-selectable">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -135,7 +135,14 @@
             <article><span>04</span><div><h3>Direction-aware evaluation</h3><p>Correct→Wrong and Wrong→Correct transitions are reported separately.</p></div></article>
           </div>
           <figure class="paper-figure figure-card">
-            <img src="assets/methodology.svg" alt="Diagram of the two-pass branch-paired audit protocol" loading="lazy">
+            <object class="methodology-vector" data="assets/methodology.svg" type="image/svg+xml" aria-label="Diagram of the two-pass branch-paired audit protocol">
+              <a href="assets/methodology.svg">Open the protocol diagram</a>
+            </object>
+            <div class="figure-actions">
+              <button type="button" data-enlarge-methodology hidden>Enlarge figure ↗</button>
+              <a href="assets/methodology.svg" target="_blank" rel="noopener">Open SVG ↗</a>
+              <a href="assets/methodology.pdf" target="_blank" rel="noopener">PDF ↗</a>
+            </div>
             <figcaption>The branch-paired protocol used in the full audit.</figcaption>
           </figure>
         </div>
@@ -253,10 +260,10 @@ python make_figures.py</code></pre>
 
   <dialog class="figure-dialog" aria-labelledby="figure-dialog-title">
     <div class="dialog-toolbar"><h2 id="figure-dialog-title">Figure</h2><div><a data-figure-original href="assets/methodology.svg" target="_blank" rel="noopener">Open original ↗</a><button type="button" data-close-figure aria-label="Close figure">Close <span aria-hidden="true">×</span></button></div></div>
-    <div class="dialog-image"><img data-figure-image alt=""></div>
+    <div class="dialog-image"><img data-figure-image alt=""><object class="methodology-vector" data-figure-vector type="image/svg+xml" aria-label="Diagram of the two-pass branch-paired audit protocol" hidden><a href="assets/methodology.svg">Open the protocol diagram</a></object></div>
     <p data-figure-caption></p>
   </dialog>
   <div class="sr-only" role="status" data-copy-status></div>
-  <script src="script.js?v=20260926-editorial"></script>
+  <script src="script.js?v=20260926-selectable"></script>
 </body>
 </html>

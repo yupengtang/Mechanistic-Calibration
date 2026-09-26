@@ -100,6 +100,40 @@ resultTabs.forEach((tab, index) => {
 
 const dialog = document.querySelector('.figure-dialog');
 if (typeof dialog.showModal === 'function') {
+  const fullImage = document.querySelector('[data-figure-image]');
+  const fullVector = document.querySelector('[data-figure-vector]');
+  fullVector.addEventListener('load', () => {
+    // Keyboard events inside an embedded SVG do not bubble to the page.
+    fullVector.contentDocument?.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && dialog.open) {
+        event.preventDefault();
+        dialog.close();
+      }
+    });
+  });
+  function openFigure(figure, source, title, selectable = false) {
+    document.querySelector('#figure-dialog-title').textContent = title;
+    fullImage.hidden = selectable;
+    fullVector.hidden = !selectable;
+    if (selectable) {
+      fullVector.data = source;
+    } else {
+      fullImage.src = source;
+      fullImage.alt = title;
+    }
+    document.querySelector('[data-figure-original]').href = source;
+    document.querySelector('[data-figure-caption]').textContent = figure.querySelector('figcaption')?.textContent || '';
+    dialog.showModal();
+    document.body.classList.add('dialog-open');
+    document.querySelector('[data-close-figure]').focus();
+  }
+  // Keep the SVG document outside a button so native text selection works.
+  const methodologyButton = document.querySelector('[data-enlarge-methodology]');
+  methodologyButton.hidden = false;
+  methodologyButton.addEventListener('click', () => {
+    const figure = methodologyButton.closest('figure');
+    openFigure(figure, figure.querySelector('object').data, 'Two-pass branch-paired audit protocol', true);
+  });
   document.querySelectorAll('figure > img').forEach(img => {
     const figure = img.closest('figure');
     const button = document.createElement('button');
@@ -109,15 +143,7 @@ if (typeof dialog.showModal === 'function') {
     img.before(button);
     button.append(img);
     button.addEventListener('click', () => {
-      document.querySelector('#figure-dialog-title').textContent = figure.querySelector('h3')?.textContent || img.alt;
-      const fullImage = document.querySelector('[data-figure-image]');
-      fullImage.src = img.src;
-      fullImage.alt = img.alt;
-      document.querySelector('[data-figure-original]').href = img.src;
-      document.querySelector('[data-figure-caption]').textContent = figure.querySelector('figcaption')?.textContent || '';
-      dialog.showModal();
-      document.body.classList.add('dialog-open');
-      document.querySelector('[data-close-figure]').focus();
+      openFigure(figure, img.src, figure.querySelector('h3')?.textContent || img.alt);
     });
   });
   document.querySelector('[data-close-figure]').addEventListener('click', () => dialog.close());
