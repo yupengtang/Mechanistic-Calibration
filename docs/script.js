@@ -1,72 +1,150 @@
 const header = document.querySelector('[data-header]');
+const progress = document.querySelector('[data-progress]');
 const menuButton = document.querySelector('[data-menu]');
 const nav = document.querySelector('[data-nav]');
 
 function updateHeader() {
-  header?.classList.toggle('is-scrolled', window.scrollY > 16);
+  header.classList.toggle('is-scrolled', window.scrollY > 16);
+  if (window.scrollY < 80) nav.querySelectorAll('a').forEach(link => {
+    link.classList.remove('is-active');
+    link.removeAttribute('aria-current');
+  });
+  const distance = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.transform = `scaleX(${distance > 0 ? Math.min(1, window.scrollY / distance) : 0})`;
 }
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
-
-menuButton?.addEventListener('click', () => {
+window.addEventListener('resize', updateHeader, { passive: true });
+function closeMenu() {
+  nav.classList.remove('is-open');
+  menuButton.setAttribute('aria-expanded', 'false');
+}
+menuButton.addEventListener('click', () => {
   const open = menuButton.getAttribute('aria-expanded') === 'true';
   menuButton.setAttribute('aria-expanded', String(!open));
-  nav?.classList.toggle('is-open', !open);
+  nav.classList.toggle('is-open', !open);
+});
+nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+    closeMenu();
+    menuButton.focus();
+  }
 });
 
-nav?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('is-open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  });
-});
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((node) => revealObserver.observe(node));
-
-const sectionLinks = [...document.querySelectorAll('.site-nav a')];
-const sections = sectionLinks
-  .map((link) => document.querySelector(link.getAttribute('href')))
-  .filter(Boolean);
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    sectionLinks.forEach((link) => {
-      link.classList.toggle('is-active', link.getAttribute('href') === `#${entry.target.id}`);
+// Content is visible without JavaScript; motion is an optional enhancement.
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
     });
-  });
-}, { rootMargin: '-25% 0px -68%', threshold: 0 });
-sections.forEach((section) => sectionObserver.observe(section));
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(node => revealObserver.observe(node));
+  const links = [...nav.querySelectorAll('a')];
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) links.forEach(link => {
+        const active = link.hash === `#${entry.target.id}`;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    });
+  }, { rootMargin: '-15% 0px -50%', threshold: 0 });
+  links.forEach(link => sectionObserver.observe(document.querySelector(link.hash)));
+}
 
 const branchNotes = {
-  neutral: 'Neutral reconsideration estimates ordinary prompt drift without an opponent.',
-  anonymous: 'Anonymous disagreement adds an opposing answer without an expertise cue.',
-  expert: 'Expert-labeled disagreement changes only the source description relative to the anonymous branch.'
+  neutral: 'Reflection measures revision without an opponent. The initial answer and evidence stay fixed. Illustrative outcomes only.',
+  anonymous: 'An unnamed assistant gives the opposing answer. Comparing A₁ with A₀ measures the effect of disagreement. Illustrative outcomes only.',
+  expert: 'The same opposition is attributed to a domain expert. Comparing A₃ with A₁ measures the source-label effect. Illustrative outcomes only.'
 };
-const branchButtons = document.querySelectorAll('[data-branch]');
-const demoNote = document.querySelector('[data-demo-note]');
-branchButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    branchButtons.forEach((item) => item.classList.remove('is-active'));
-    button.classList.add('is-active');
-    if (demoNote) demoNote.textContent = branchNotes[button.dataset.branch];
+const branches = document.querySelectorAll('[data-branch]');
+branches.forEach(button => button.addEventListener('click', () => {
+  branches.forEach(item => {
+    item.classList.toggle('is-active', item === button);
+    item.setAttribute('aria-pressed', String(item === button));
+  });
+  document.querySelector('[data-demo-note]').textContent = branchNotes[button.dataset.branch];
+}));
+
+const resultTabs = [...document.querySelectorAll('[data-result]')];
+function selectResult(tab) {
+  resultTabs.forEach(item => {
+    const active = item === tab;
+    item.setAttribute('aria-selected', String(active));
+    item.tabIndex = active ? 0 : -1;
+    const panel = document.getElementById(item.dataset.result);
+    panel.hidden = !active;
+    panel.setAttribute('role', 'tabpanel');
+    panel.tabIndex = 0;
+  });
+  updateHeader();
+}
+document.querySelector('.result-tabs').hidden = false;
+selectResult(resultTabs[0]);
+resultTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectResult(tab));
+  tab.addEventListener('keydown', event => {
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? resultTabs.length - 1 :
+      (index + (event.key === 'ArrowRight' ? 1 : -1) + resultTabs.length) % resultTabs.length;
+    selectResult(resultTabs[next]);
+    resultTabs[next].focus();
   });
 });
 
-document.querySelector('[data-copy]')?.addEventListener('click', async (event) => {
-  const text = document.querySelector('#bibtex code')?.textContent ?? '';
-  try {
-    await navigator.clipboard.writeText(text);
-    event.currentTarget.textContent = 'Copied';
-    window.setTimeout(() => { event.currentTarget.textContent = 'Copy BibTeX'; }, 1800);
-  } catch {
-    event.currentTarget.textContent = 'Select and copy';
-  }
+const dialog = document.querySelector('.figure-dialog');
+if (typeof dialog.showModal === 'function') {
+  document.querySelectorAll('figure > img').forEach(img => {
+    const figure = img.closest('figure');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'figure-zoom';
+    button.setAttribute('aria-label', `Enlarge: ${img.alt}`);
+    img.before(button);
+    button.append(img);
+    button.addEventListener('click', () => {
+      document.querySelector('#figure-dialog-title').textContent = figure.querySelector('h3')?.textContent || img.alt;
+      const fullImage = document.querySelector('[data-figure-image]');
+      fullImage.src = img.src;
+      fullImage.alt = img.alt;
+      document.querySelector('[data-figure-original]').href = img.src;
+      document.querySelector('[data-figure-caption]').textContent = figure.querySelector('figcaption')?.textContent || '';
+      dialog.showModal();
+      document.body.classList.add('dialog-open');
+      document.querySelector('[data-close-figure]').focus();
+    });
+  });
+  document.querySelector('[data-close-figure]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+  });
+  dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+}
+
+document.querySelectorAll('[data-copy-target]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copyTarget);
+    const label = button.textContent;
+    try {
+      await navigator.clipboard.writeText(source.textContent.trim());
+      button.textContent = 'Copied';
+      document.querySelector('[data-copy-status]').textContent = `${label} copied to clipboard.`;
+      window.setTimeout(() => { button.textContent = label; }, 1800);
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.querySelector('[data-copy-status]').textContent = 'Text selected. Use your browser’s copy command.';
+    }
+  });
 });

@@ -1,0 +1,38 @@
+name: Sync paper release assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "paper/paper.pdf"
+      - "paper/arxiv-preprint.pdf"
+      - "paper/neurips-2026-camera-ready-source.zip"
+      - "paper/arxiv-source.tar.gz"
+      - ".github/workflows/paper-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-release
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Update the four paper assets in the existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release view neurips-2026-camera-ready
+          gh release upload neurips-2026-camera-ready \
+            paper/paper.pdf \
+            paper/arxiv-preprint.pdf \
+            paper/neurips-2026-camera-ready-source.zip \
+            paper/arxiv-source.tar.gz \
+            --clobber

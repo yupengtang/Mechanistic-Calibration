@@ -1,19 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8f7f2"/><stop offset="1" stop-color="#eef3f6"/></linearGradient></defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="58" y="54" width="1084" height="522" rx="24" fill="#fff" stroke="#dbe1e7"/>
-  <text x="100" y="118" font-family="Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="2" fill="#9a6a00">NEURIPS 2026</text>
-  <text x="100" y="212" font-family="Georgia, serif" font-size="66" font-weight="700" fill="#111827">When Expert</text>
-  <text x="100" y="286" font-family="Georgia, serif" font-size="66" font-weight="700" fill="#111827">Disagreement Hurts</text>
-  <text x="100" y="340" font-family="Arial, sans-serif" font-size="28" fill="#4b5563">Auditing prestige-sensitive revision in LLM decision pipelines</text>
-  <path d="M694 199h95M789 199v-64M789 199v64M789 135h128M789 263h128" fill="none" stroke="#9ca3af" stroke-width="4"/>
-  <rect x="917" y="105" width="183" height="60" rx="12" fill="#eef2f7" stroke="#b7c0ca"/>
-  <rect x="917" y="169" width="183" height="60" rx="12" fill="#e9f2f8" stroke="#78a7c2"/>
-  <rect x="917" y="233" width="183" height="60" rx="12" fill="#fff1e8" stroke="#dc7b42"/>
-  <text x="1008" y="143" text-anchor="middle" font-family="Arial" font-size="20" fill="#374151">Reflection</text>
-  <text x="1008" y="207" text-anchor="middle" font-family="Arial" font-size="20" fill="#245b78">Anonymous</text>
-  <text x="1008" y="271" text-anchor="middle" font-family="Arial" font-size="20" fill="#a4471c">Expert label</text>
-  <circle cx="694" cy="199" r="9" fill="#111827"/>
-  <text x="100" y="505" font-family="Arial, sans-serif" font-size="24" fill="#111827">Yupeng Tang · Mingfeng Lin</text>
-  <text x="1100" y="505" text-anchor="end" font-family="Arial, sans-serif" font-size="24" fill="#4b5563">Georgia Institute of Technology</text>
+  <rect width="1200" height="630" fill="#faf9f6"/>
+  <path d="M65 68 78 62 78 89 65 95Z" fill="none" stroke="#263e36" stroke-width="1.5"/>
+  <path d="M85 62 98 68 98 95 85 89Z" fill="#a34532"/>
+  <text x="119" y="84" font-family="Arial, sans-serif" font-size="15" letter-spacing="2" fill="#263e36">NEURIPS 2026</text>
+  <text x="65" y="205" font-family="Georgia, serif" font-size="76" letter-spacing="-3" fill="#202b29">When Expert</text>
+  <text x="65" y="292" font-family="Georgia, serif" font-size="76" font-style="italic" letter-spacing="-3" fill="#a34532">Disagreement</text>
+  <text x="65" y="379" font-family="Georgia, serif" font-size="76" letter-spacing="-3" fill="#202b29">Hurts<tspan fill="#a34532">.</tspan></text>
+  <text x="68" y="441" font-family="Arial, sans-serif" font-size="22" fill="#626963">Auditing Prestige-Sensitive Revision</text>
+  <text x="68" y="475" font-family="Arial, sans-serif" font-size="22" fill="#626963">in LLM Decision Pipelines</text>
+  <path d="M68 520H1132" stroke="#d9dcd4"/>
+  <text x="68" y="566" font-family="Arial, sans-serif" font-size="20" fill="#202b29">Yupeng Tang · Mingfeng Lin</text>
+  <text x="1132" y="566" text-anchor="end" font-family="Arial, sans-serif" font-size="18" fill="#626963">Georgia Institute of Technology</text>
+  <rect x="745" y="132" width="387" height="329" rx="5" fill="#eeefe7" stroke="#d9dcd4"/>
+  <text x="774" y="174" font-family="Arial, sans-serif" font-size="14" fill="#626963">Fixed evidence. Fixed initial answer.</text>
+  <path d="M785 198V407M785 240H815M785 309H815M785 378H815" fill="none" stroke="#a6ae9c"/>
+  <rect x="815" y="212" width="286" height="55" rx="3" fill="#faf9f6" stroke="#c4cbbd"/>
+  <rect x="815" y="281" width="286" height="55" rx="3" fill="#faf9f6" stroke="#c4cbbd"/>
+  <rect x="815" y="350" width="286" height="55" rx="3" fill="#fff3ed" stroke="#c7907e"/>
+  <text x="834" y="246" font-family="Arial, sans-serif" font-size="18" fill="#202b29">Reflection</text>
+  <text x="834" y="315" font-family="Arial, sans-serif" font-size="18" fill="#202b29">Anonymous disagreement</text>
+  <text x="834" y="384" font-family="Arial, sans-serif" font-size="18" fill="#a34532">Expert-labeled disagreement</text>
 </svg>
