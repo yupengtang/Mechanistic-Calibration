@@ -4,7 +4,8 @@ It contains:
 
 - the NeurIPS camera-ready PDF;
 - a preprint-style PDF;
-- portable LaTeX source packages for both versions; and
+- portable LaTeX source packages for both versions;
+- the vector methodology figure and its editable PowerPoint source; and
 - the saved-output reproducibility package used for the camera-ready analyses.
 
 The reproducibility package regenerates the reported numerical analyses, tables, and figures without API credentials, paid model calls, or GPU access. The same files are browsable under [`reproducibility/`](https://github.com/yupengtang/when-expert-disagreement-hurts/tree/main/reproducibility), and the repository CI reruns the analysis.

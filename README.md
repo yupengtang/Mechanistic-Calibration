@@ -30,16 +30,17 @@ The reproduction script regenerates 67 CSV and LaTeX outputs from the released r
 
 All 1,989 original question–excerpt pairs are now recovered. The [input audit](reproducibility/data-repair/README.md) verifies their provenance and provides separately versioned evidence-complete inputs: 48 original Law excerpts and 16 control Law excerpts required expansion. Historical results are preserved; repaired inputs require fresh model calls and must not be paired with old outputs. The same audit corrects 96 Science question associations in an earlier reconstructed input file, without changing the original saved trial outputs.
 
+The experiment loader accepts all three released input files, preserves their provenance, and rejects changed content with inconsistent checksums. Its offline smoke tests run with `python -m unittest discover -s experiment/tests -p 'test_*.py' -v` from the repository root. This check loads inputs only; it does not query a model.
+
 ## Repository structure
 
 | Path | Contents |
 |---|---|
 | [`reproducibility/`](reproducibility/) | Saved outputs, analysis code, generated tables, and figure data used in the paper |
 | [`experiment/`](experiment/) | Original experiment pipeline and frozen study materials |
-| [`paper/`](paper/) | Camera-ready and arXiv source archives, including the editable Figure 1 source |
 | [`docs/`](docs/) | Project-page source and paper figures |
 
-The [camera-ready release](https://github.com/yupengtang/when-expert-disagreement-hurts/releases/latest) includes the paper, source archives, and a standalone reproduction package.
+The [camera-ready release](https://github.com/yupengtang/when-expert-disagreement-hurts/releases/latest) includes the paper, preprint, LaTeX source archives, [editable Figure 1](https://github.com/yupengtang/when-expert-disagreement-hurts/releases/download/neurips-2026-camera-ready/methodology_schematic_editable.pptx), and a standalone reproduction package.
 
 ## Citation
 

@@ -5,11 +5,19 @@ on:
     branches: [main]
     paths:
       - "reproducibility/**"
+      - "experiment/src/data_structures.py"
+      - "experiment/src/__init__.py"
+      - "experiment/tests/**"
       - ".github/workflows/reproduce.yml"
+      - ".github/workflows/release.yml"
   pull_request:
     paths:
       - "reproducibility/**"
+      - "experiment/src/data_structures.py"
+      - "experiment/src/__init__.py"
+      - "experiment/tests/**"
       - ".github/workflows/reproduce.yml"
+      - ".github/workflows/release.yml"
   workflow_dispatch:
 
 permissions:
@@ -33,6 +41,8 @@ jobs:
         run: python reproduce.py
       - name: Verify input recovery and complete evidence spans
         run: python -m unittest discover -s reproducibility/data-repair -p 'test_*.py' -v
+      - name: Verify experiment input loading
+        run: python -S -m unittest discover -s experiment/tests -p 'test_*.py' -v
       - name: Verify checked-in numerical outputs
         run: git diff --exit-code -- reproducibility/rebuttal/analysis reproducibility/tables
       - name: Regenerate figures

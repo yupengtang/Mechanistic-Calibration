@@ -24,6 +24,16 @@ class Question:
     hash: str = field(default="")
     metadata: Dict[str, Any] = field(default_factory=dict)
     is_aep: bool = False  # True if entities are virtualized (AEP transformation)
+    candidate_id: Optional[str] = None
+    source: Optional[str] = None
+    ground_truth: Optional[str] = None
+    confidence_tier: Optional[str] = None
+    yes_proportion_llama: Optional[float] = None
+    yes_proportion_mistral: Optional[float] = None
+    excerpt_hash: Optional[str] = None
+    input_sha256: Optional[str] = None
+    dataset_version: Optional[str] = None
+    provenance: Dict[str, Any] = field(default_factory=dict)
     
     def __post_init__(self):
         if not self.hash:
@@ -256,6 +266,12 @@ def load_questions(questions_file: Path) -> List[Question]:
                 # Backward-compatibility: allow older field name "prompt"
                 if "prompt_base" not in data and "prompt" in data:
                     data["prompt_base"] = data.pop("prompt")
+                if data.get("input_sha256"):
+                    digest = hashlib.sha256((data["prompt_base"] + "|" + data["excerpt"]).encode()).hexdigest()
+                    if data["input_sha256"] != digest or data.get("hash") != digest[:16]:
+                        raise ValueError(f"Input checksum mismatch: {data.get('question_id')}")
+                    if data.get("excerpt_hash") != hashlib.sha256(data["excerpt"].encode()).hexdigest()[:16]:
+                        raise ValueError(f"Excerpt checksum mismatch: {data.get('question_id')}")
                 questions.append(Question(**data))
     return questions
 
@@ -306,4 +322,3 @@ if __name__ == "__main__":
     config = ExperimentConfig()
     print("Default Configuration:")
     print(json.dumps(config.to_dict(), indent=2))
-

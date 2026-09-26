@@ -1,20 +1,32 @@
-name: Publish camera-ready release
+name: Update release assets
 
 on:
   push:
-    tags:
-      - "neurips-2026-camera-ready"
+    branches: [main]
+    paths:
+      - "docs/assets/paper.pdf"
+      - "docs/assets/methodology.pdf"
+      - "reproducibility/**"
+      - ".github/release-notes.md"
+      - ".github/workflows/release.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: paper-release
+  cancel-in-progress: false
+
 jobs:
-  release:
+  sync:
     runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
-      - name: Package the browsable reproducibility directory
+      - name: Verify input recovery and package the reproducibility directory
         run: |
+          python -m unittest discover -s reproducibility/data-repair -p 'test_*.py' -v
           python - <<'PY'
           from pathlib import Path
           import zipfile
@@ -24,15 +36,15 @@ jobs:
                   if path.is_file() and '__pycache__' not in path.parts and path.suffix != '.pyc':
                       archive.write(path, Path('supplementary') / path.relative_to(root))
           PY
-      - name: Create GitHub release
+      - name: Update the paper, vector figure, and reproducibility package
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
-            --title "NeurIPS 2026 camera-ready" \
-            --notes-file .github/release-notes.md \
-            docs/assets/paper.pdf#paper.pdf \
-            paper/arxiv-preprint.pdf#arxiv-preprint.pdf \
-            paper/neurips-2026-camera-ready-source.zip#neurips-2026-camera-ready-source.zip \
-            paper/arxiv-source.tar.gz#arxiv-source.tar.gz \
-            when-expert-disagreement-hurts-reproducibility.zip#when-expert-disagreement-hurts-reproducibility.zip
+          gh release view neurips-2026-camera-ready
+          gh release upload neurips-2026-camera-ready \
+            docs/assets/paper.pdf \
+            docs/assets/methodology.pdf \
+            when-expert-disagreement-hurts-reproducibility.zip \
+            --clobber
+          gh release edit neurips-2026-camera-ready --notes-file .github/release-notes.md
