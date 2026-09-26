@@ -1,109 +1,12 @@
-const header = document.querySelector('[data-header]');
-const progress = document.querySelector('[data-progress]');
-const menuButton = document.querySelector('[data-menu]');
-const nav = document.querySelector('[data-nav]');
-
-function updateHeader() {
-  header.classList.toggle('is-scrolled', window.scrollY > 16);
-  if (window.scrollY < 80) nav.querySelectorAll('a').forEach(link => {
-    link.classList.remove('is-active');
-    link.removeAttribute('aria-current');
-  });
-  const distance = document.documentElement.scrollHeight - window.innerHeight;
-  progress.style.transform = `scaleX(${distance > 0 ? Math.min(1, window.scrollY / distance) : 0})`;
-}
-updateHeader();
-window.addEventListener('scroll', updateHeader, { passive: true });
-window.addEventListener('resize', updateHeader, { passive: true });
-function closeMenu() {
-  nav.classList.remove('is-open');
-  menuButton.setAttribute('aria-expanded', 'false');
-}
-menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', String(!open));
-  nav.classList.toggle('is-open', !open);
-});
-nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && nav.classList.contains('is-open')) {
-    closeMenu();
-    menuButton.focus();
-  }
-});
-
-// Content is visible without JavaScript; motion is an optional enhancement.
-if ('IntersectionObserver' in window) {
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(node => revealObserver.observe(node));
-  const links = [...nav.querySelectorAll('a')];
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) links.forEach(link => {
-        const active = link.hash === `#${entry.target.id}`;
-        link.classList.toggle('is-active', active);
-        if (active) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    });
-  }, { rootMargin: '-15% 0px -50%', threshold: 0 });
-  links.forEach(link => sectionObserver.observe(document.querySelector(link.hash)));
-}
-
-const branchNotes = {
-  neutral: 'Reflection measures revision without an opponent. The initial answer and evidence stay fixed. Illustrative outcomes only.',
-  anonymous: 'An unnamed assistant gives the opposing answer. Comparing A₁ with A₀ measures the effect of disagreement. Illustrative outcomes only.',
-  expert: 'The same opposition is attributed to a domain expert. Comparing A₃ with A₁ measures the source-label effect. Illustrative outcomes only.'
-};
-const branches = document.querySelectorAll('[data-branch]');
-branches.forEach(button => button.addEventListener('click', () => {
-  branches.forEach(item => {
-    item.classList.toggle('is-active', item === button);
-    item.setAttribute('aria-pressed', String(item === button));
-  });
-  document.querySelector('[data-demo-note]').textContent = branchNotes[button.dataset.branch];
-}));
-
-const resultTabs = [...document.querySelectorAll('[data-result]')];
-function selectResult(tab) {
-  resultTabs.forEach(item => {
-    const active = item === tab;
-    item.setAttribute('aria-selected', String(active));
-    item.tabIndex = active ? 0 : -1;
-    const panel = document.getElementById(item.dataset.result);
-    panel.hidden = !active;
-    panel.setAttribute('role', 'tabpanel');
-    panel.tabIndex = 0;
-  });
-  updateHeader();
-}
-document.querySelector('.result-tabs').hidden = false;
-selectResult(resultTabs[0]);
-resultTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectResult(tab));
-  tab.addEventListener('keydown', event => {
-    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const next = event.key === 'Home' ? 0 : event.key === 'End' ? resultTabs.length - 1 :
-      (index + (event.key === 'ArrowRight' ? 1 : -1) + resultTabs.length) % resultTabs.length;
-    selectResult(resultTabs[next]);
-    resultTabs[next].focus();
-  });
-});
-
 const dialog = document.querySelector('.figure-dialog');
-if (typeof dialog.showModal === 'function') {
-  const fullImage = document.querySelector('[data-figure-image]');
-  const fullVector = document.querySelector('[data-figure-vector]');
+
+if (dialog && typeof dialog.showModal === 'function') {
+  const fullImage = dialog.querySelector('[data-figure-image]');
+  const fullVector = dialog.querySelector('[data-figure-vector]');
+  let opener = null;
+
   fullVector.addEventListener('load', () => {
-    // Keyboard events inside an embedded SVG do not bubble to the page.
+    // Keyboard events in the embedded SVG do not bubble to the parent page.
     fullVector.contentDocument?.addEventListener('keydown', event => {
       if (event.key === 'Escape' && dialog.open) {
         event.preventDefault();
@@ -111,8 +14,10 @@ if (typeof dialog.showModal === 'function') {
       }
     });
   });
-  function openFigure(figure, source, title, selectable = false) {
-    document.querySelector('#figure-dialog-title').textContent = title;
+
+  function openFigure(button, figure, source, title, selectable = false) {
+    opener = button;
+    dialog.querySelector('#figure-dialog-title').textContent = title;
     fullImage.hidden = selectable;
     fullVector.hidden = !selectable;
     if (selectable) {
@@ -121,19 +26,23 @@ if (typeof dialog.showModal === 'function') {
       fullImage.src = source;
       fullImage.alt = title;
     }
-    document.querySelector('[data-figure-original]').href = source;
-    document.querySelector('[data-figure-caption]').textContent = figure.querySelector('figcaption')?.textContent || '';
+    dialog.querySelector('[data-figure-original]').href = source;
+    dialog.querySelector('[data-figure-caption]').textContent = figure.querySelector('figcaption')?.textContent || '';
     dialog.showModal();
     document.body.classList.add('dialog-open');
-    document.querySelector('[data-close-figure]').focus();
+    dialog.querySelector('[data-close-figure]').focus();
   }
-  // Keep the SVG document outside a button so native text selection works.
+
+  // An object, not an image or button, preserves native SVG text selection.
   const methodologyButton = document.querySelector('[data-enlarge-methodology]');
-  methodologyButton.hidden = false;
-  methodologyButton.addEventListener('click', () => {
-    const figure = methodologyButton.closest('figure');
-    openFigure(figure, figure.querySelector('object').data, 'Two-pass branch-paired audit protocol', true);
-  });
+  if (methodologyButton) {
+    methodologyButton.hidden = false;
+    methodologyButton.addEventListener('click', () => {
+      const figure = methodologyButton.closest('figure');
+      openFigure(methodologyButton, figure, figure.querySelector('object').data, 'Branch-paired audit protocol', true);
+    });
+  }
+
   document.querySelectorAll('figure > img').forEach(img => {
     const figure = img.closest('figure');
     const button = document.createElement('button');
@@ -143,16 +52,20 @@ if (typeof dialog.showModal === 'function') {
     img.before(button);
     button.append(img);
     button.addEventListener('click', () => {
-      openFigure(figure, img.src, figure.querySelector('h3')?.textContent || img.alt);
+      openFigure(button, figure, img.src, figure.querySelector('h3')?.textContent || img.alt);
     });
   });
-  document.querySelector('[data-close-figure]').addEventListener('click', () => dialog.close());
+
+  dialog.querySelector('[data-close-figure]').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
     if (event.target !== dialog) return;
     const bounds = dialog.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
-  dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+  dialog.addEventListener('close', () => {
+    document.body.classList.remove('dialog-open');
+    opener?.focus({ preventScroll: true });
+  });
 }
 
 document.querySelectorAll('[data-copy-target]').forEach(button => {

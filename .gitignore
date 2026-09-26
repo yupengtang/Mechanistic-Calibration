@@ -43,6 +43,7 @@ experiment/data/*.txt
 !experiment/data/README.md
 
 # Figures
+/page-screenshots/
 experiment/figures/*.png
 experiment/figures/*.pdf
 !experiment/figures/README.md
