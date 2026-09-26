@@ -5,8 +5,8 @@ type: software
 version: 1.0.0
 date-released: 2026-09-26
 license: MIT
-repository-code: "https://github.com/yupengtang/Mechanistic-Calibration"
-url: "https://yupengtang.github.io/Mechanistic-Calibration/"
+repository-code: "https://github.com/yupengtang/when-expert-disagreement-hurts"
+url: "https://yupengtang.github.io/when-expert-disagreement-hurts/"
 authors:
   - family-names: Tang
     given-names: Yupeng

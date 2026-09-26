@@ -19,7 +19,7 @@ jobs:
           from pathlib import Path
           import zipfile
           root = Path('reproducibility')
-          with zipfile.ZipFile('mechanistic-calibration-reproducibility.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
+          with zipfile.ZipFile('when-expert-disagreement-hurts-reproducibility.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
               for path in sorted(root.rglob('*')):
                   if path.is_file() and '__pycache__' not in path.parts and path.suffix != '.pyc':
                       archive.write(path, Path('supplementary') / path.relative_to(root))
@@ -35,4 +35,4 @@ jobs:
             release-assets/arxiv-preprint.pdf#arxiv-preprint.pdf \
             release-assets/neurips-2026-camera-ready-source.zip#neurips-2026-camera-ready-source.zip \
             release-assets/arxiv-source.tar.gz#arxiv-source.tar.gz \
-            mechanistic-calibration-reproducibility.zip#mechanistic-calibration-reproducibility.zip
+            when-expert-disagreement-hurts-reproducibility.zip#when-expert-disagreement-hurts-reproducibility.zip

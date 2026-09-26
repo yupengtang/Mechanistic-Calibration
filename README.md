@@ -4,9 +4,9 @@
 Yupeng Tang and Mingfeng Lin<br>
 Accepted at NeurIPS 2026
 
-[Project page](https://yupengtang.github.io/Mechanistic-Calibration/) ·
-[Paper](https://yupengtang.github.io/Mechanistic-Calibration/assets/paper.pdf) ·
-[Reproducibility artifact](https://github.com/yupengtang/Mechanistic-Calibration/releases/latest)
+[Project page](https://yupengtang.github.io/when-expert-disagreement-hurts/) ·
+[Paper](https://yupengtang.github.io/when-expert-disagreement-hurts/assets/paper.pdf) ·
+[Reproducibility artifact](https://github.com/yupengtang/when-expert-disagreement-hurts/releases/latest)
 
 Language models often revise an answer after another agent disagrees. This repository accompanies a branch-paired audit that separates ordinary prompt drift, anonymous-disagreement sensitivity, and the incremental effect of describing the disagreeing source as an expert. Each comparison holds the question, evidence excerpt, and initial model answer fixed.
 
@@ -30,8 +30,8 @@ The original full-benchmark input archive is incomplete: two Medicine excerpts a
 Clone the repository and run the packaged offline analysis:
 
 ```bash
-git clone https://github.com/yupengtang/Mechanistic-Calibration.git
-cd Mechanistic-Calibration/reproducibility
+git clone https://github.com/yupengtang/when-expert-disagreement-hurts.git
+cd when-expert-disagreement-hurts/reproducibility
 python -m pip install -r requirements.txt
 python reproduce.py
 python make_figures.py
@@ -57,11 +57,11 @@ Running new API experiments requires an `OPENROUTER_API_KEY`; local-model experi
 | File | Purpose |
 |---|---|
 | `paper.pdf` | NeurIPS 2026 camera-ready paper |
-| `mechanistic-calibration-reproducibility.zip` | Saved outputs and offline reproduction code |
+| `when-expert-disagreement-hurts-reproducibility.zip` | Saved outputs and offline reproduction code |
 | `neurips-2026-camera-ready-source.zip` | Portable LaTeX source for the final paper |
 | `arxiv-source.tar.gz` | Preprint-mode LaTeX source |
 
-These files are attached to the [camera-ready release](https://github.com/yupengtang/Mechanistic-Calibration/releases/latest).
+These files are attached to the [camera-ready release](https://github.com/yupengtang/when-expert-disagreement-hurts/releases/latest).
 
 ## Citation
 
